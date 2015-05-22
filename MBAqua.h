@@ -10,7 +10,7 @@ struct MBPicture {
 	NSImage *img;
 };
 
-@interface MBAqua : NSObject
+@interface MBAqua : NSObject <NSApplicationDelegate>
 {
     IBOutlet id game;
     IBOutlet id ui;

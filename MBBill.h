@@ -32,7 +32,7 @@
 
 + (void)Bill_class_init:g :h :n :o :u;
 
-+ Bill_enter;
++ (instancetype)Bill_enter;
 - (void)Bill_draw;
 - (void)Bill_update;
 - (void)Bill_set_dying;

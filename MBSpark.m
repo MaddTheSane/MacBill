@@ -26,7 +26,7 @@ static MBPicture *pictures[2];
 	return [ui UI_picture_height:pictures[0]];
 }
 
-- (void)Spark_draw:(int)x :(int)y :(int)index
+- (void)drawAtX:(int)x y:(int)y index:(int)index
 {
 	[ui UI_draw:pictures[index] :x :y];
 }

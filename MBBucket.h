@@ -3,16 +3,19 @@
 /* #import <Cocoa/Cocoa.h> */
 #import <AppKit/AppKit.h>
 
+@class MBUI;
+@class MBNetwork;
+
 @interface MBBucket : NSObject
 {
-    IBOutlet id network;
-    IBOutlet id ui;
+    IBOutlet MBNetwork *network;
+    IBOutlet MBUI *ui;
 }
 
 - (void)Bucket_load_pix;
-- (void)Bucket_draw;
-- (int)Bucket_clicked:(int)x :(int)y;
-- (void)Bucket_grab:(int)x :(int)y;
-- (void)Bucket_release:(int)x :(int)y;
+- (void)draw;
+- (BOOL)clickedAtX:(int)x y:(int)y;
+- (void)grabAtX:(int)x y:(int)y;
+- (void)releaseAtX:(int)x y:(int)y;
 
 @end

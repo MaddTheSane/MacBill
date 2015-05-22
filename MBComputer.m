@@ -53,7 +53,7 @@ determineOS(MBComputer *computer) {
 
 	int j, counter = 0, flag;
 	int randx, randy;
-	int screensize = [game Game_screensize];
+	int screensize = [game screenSize];
 	int border = BORDER(screensize);
 	do {
 		if (++counter > 4000)
@@ -63,8 +63,8 @@ determineOS(MBComputer *computer) {
 		flag = 1;
 		/* check for conflicting computer placement */
 		for (j = 0; j < index && flag; j++) {
-			MBComputer *c = [network Network_get_computer:j];
-			int twidth = width - BILL_OFFSET_X + [MBBill Bill_width];
+			MBComputer *c = [network computerAtIndex:j];
+			int twidth = width - BILL_OFFSET_X + [MBBill width];
 			if ([ui UI_intersect:randx :randy :twidth :height
 					 :c->x :c->y :twidth :height])
 				flag = 0;
@@ -79,26 +79,26 @@ determineOS(MBComputer *computer) {
 	return computer;
 }
 
-- (int)Computer_on:(int)locx :(int)locy
+- (BOOL)Computer_on:(int)locx :(int)locy
 {
-	return (locx + [Os OS_width] / 2 >= x &&
-		locx - [Os OS_width] / 2 < x + width &&
-		locy + [Os OS_height] / 2 >= y &&
-		locy - [Os OS_height] / 2 < y + height);
+	return (locx + [Os width] / 2 >= x &&
+		locx - [Os width] / 2 < x + width &&
+		locy + [Os height] / 2 >= y &&
+		locy - [Os height] / 2 < y + height);
 }
 
-- (int)Computer_compatible:(int)system
+- (BOOL)Computer_compatible:(int)system
 {
 	return (type == system ||
 		(type >= MIN_PC && [Os OS_ispc:system]));
 }
 
-- (void)Computer_draw
+- (void)draw
 {
 	[ui UI_draw:pictures[type] :x :y];
 	if (os != OS_OFF)
 		[Os OS_draw:os
-			:x + OS_OFFSET :y + OS_OFFSET + 13];
+			atX:x + OS_OFFSET y:y + OS_OFFSET + 13];
 }
 
 + (void)Computer_load_pix
@@ -110,12 +110,12 @@ determineOS(MBComputer *computer) {
 	height = [ui UI_picture_height:pictures[0]];
 }
 
-- (int)Computer_width
+- (int)width
 {
 	return width;
 }
 
-- (int)Computer_height
+- (int)height
 {
 	return height;
 }

@@ -43,7 +43,7 @@ static int screensize;
 }
 
 // private
-- (int)runAlertPanel:(NSString *)name :(BOOL)needsAltBtn;
+- (NSInteger)runAlertPanel:(NSString *)name :(BOOL)needsAltBtn;
 {
 	NSString *strMsg, *strTitle, *strBtn1, *strBtn2;
 	strTitle = NSLocalizedString([name stringByAppendingString:@"_dialog_str_title"], nil);
@@ -56,9 +56,9 @@ static int screensize;
 	}
 	if ([name isEqualToString:@"score"]) {
 		return NSRunAlertPanel(strTitle, strMsg, strBtn1, strBtn2, nil,
-								[game Game_level], [game Game_score]);
+								game.level, game.score);
 	} else {
-		return NSRunAlertPanel(strTitle, strMsg, strBtn1, strBtn2, nil);
+		return NSRunAlertPanel(strTitle, @"%@", strBtn1, strBtn2, nil, strMsg);
 	}
 }
 
@@ -101,7 +101,7 @@ static int screensize;
 - (void)aqua_load_picture:(const char *)name :(int)trans :(MBPicture **)pictp
 {
 	MBPicture *pict = malloc(sizeof(MBPicture));
-	NSString *s = [NSString stringWithCString:name];
+	NSString *s = @(name);
 	pict->img = [NSImage imageNamed:s];
 	*pictp = pict;
 }
@@ -151,7 +151,7 @@ static int screensize;
 
 - (void)aqua_draw_string:(const char *)str :(int)x :(int)y
 {
-	NSString *status = [NSString stringWithCString:str];
+	NSString *status = @(str);
 	NSDictionary *attrs = nil;
 	NSSize size = [status sizeWithAttributes:attrs];
 	[frame lockFocus];
@@ -188,7 +188,7 @@ static int screensize;
 	switch (dialog) {
 	case DIALOG_ENTERNAME:
 		[NSApp runModalForWindow:[entry window]];
-		[game Game_add_high_score:[[entry stringValue] cString]];
+		[game Game_add_high_score:[entry stringValue]];
 		break;
 	case DIALOG_PAUSEGAME:
 		[self runAlertPanel:@"pause" :NO];
@@ -222,7 +222,7 @@ static int screensize;
 
 - (IBAction)new_game:(id)sender
 {
-	int ret;
+	NSInteger ret;
 	ret = [self runAlertPanel:@"newgame" :YES];
 	if (ret != NSAlertDefaultReturn) {
 		return;
@@ -244,7 +244,7 @@ static int screensize;
 
 - (IBAction)warp_level:(id)sender
 {
-	int ret;
+	NSInteger ret;
 	ret = [NSApp runModalForWindow:[warp window]];
 	if (ret == DIALOG_OK) {
 		int level = [warp intValue];
@@ -263,7 +263,8 @@ static int screensize;
 
 - (IBAction)story:(id)sender
 {
-    NSString *string = [NSString stringWithContentsOfFile: 
+    //NSString *strLocation = [[NSBundle mainBundle] pathForResource:@"story" ofType:@"rtf"];
+    NSString *string = [NSString stringWithContentsOfFile:
       [[NSBundle mainBundle] pathForResource: @"story" ofType: @"txt"]];
     NSLog(@"%@", [story_tv description]);
     [story_tv setString: string];
@@ -272,9 +273,8 @@ static int screensize;
 
 - (IBAction)rules:(id)sender
 {
-    NSString *string = [NSString stringWithContentsOfFile: 
-      [[NSBundle mainBundle] pathForResource: @"rules" ofType: @"txt"]];
-    [rules_tv setString: string];
+    NSString *strLocation = [[NSBundle mainBundle] pathForResource:@"rules" ofType:@"rtf"];
+    [rules_tv readRTFDFromFile:strLocation];
 	[NSApp runModalForWindow:rules];
 }
 
@@ -285,21 +285,21 @@ static int screensize;
 
 - (IBAction)pref:(id)sender
 {
-	int i, tmp, ret;
+	NSInteger i, tmp, ret;
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSString *keys[] = { @"fieldsize", @"interval", @"transparency" };
 	id texts[] = { text_size, text_timer, text_trans };
 	id sliders[] = { slider_size, slider_timer, slider_trans };
 
 	for (i = 0; i < 3; i++) {
-		tmp = [[defaults objectForKey:keys[i]] intValue];
-		[texts[i] setIntValue:tmp];
-		[sliders[i] setIntValue:tmp];
+		tmp = [[defaults objectForKey:keys[i]] integerValue];
+		[texts[i] setIntegerValue:tmp];
+		[sliders[i] setIntegerValue:tmp];
 	}
 	ret = [NSApp runModalForWindow:[text_size window]];
 	if (ret == DIALOG_OK) {
 		for (i = 0; i < 3; i++) {
-			[defaults setInteger:[texts[i] intValue] forKey:keys[i]];
+			[defaults setInteger:[texts[i] integerValue] forKey:keys[i]];
 		}
 	}
 }
@@ -317,14 +317,14 @@ static int screensize;
 }
 
 
-- (void)aqua_button_press:(int)x :(int)y
+- (void)pressButtonAtX:(int)x y:(int)y
 {
-	[game Game_button_press:x :y];
+	[game Game_button_press:x y:y];
 }
 
-- (void)aqua_button_release:(int)x :(int)y
+- (void)releaseButtonAtX:(int)x y:(int)y
 {
-	[game Game_button_release:x :y];
+	[game Game_button_release:x y:y];
 }
 
 
@@ -355,7 +355,7 @@ static int screensize;
 
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender
 {
-	int ret;
+	NSInteger ret;
 	ret = [self runAlertPanel:@"quit" :YES];
 	if (ret != NSAlertDefaultReturn) {
 		return NSTerminateCancel;
@@ -378,7 +378,7 @@ static int screensize;
 
 
 // enable/disable menu item
-- (BOOL)validateMenuItem:(id <NSMenuItem>)menuItem
+- (BOOL)validateMenuItem:(NSMenuItem*)menuItem
 {
 	if (menuItem == menu_pause) {
 		return menu_pause_enable_flag;

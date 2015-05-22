@@ -33,7 +33,7 @@ static MBUI *ui;
 static void
 get_border(int *x, int *y) {
 	int i = RAND(0, 3);
-	int screensize = [game Game_screensize];
+	int screensize = [game screenSize];
 
 	if (i % 2 == 0)
 		*x = RAND(0, screensize - width);
@@ -66,7 +66,7 @@ static int
 move(MBBill *bill, int mode) {
 	int xdist = bill->target_x - bill->x;
 	int ydist = bill->target_y - bill->y;
-	int step = step_size([game Game_level]);
+	int step = step_size([game level]);
 	int dx, dy;
 	int signx = xdist >= 0 ? 1 : -1;
 	int signy = ydist >= 0 ? 1 : -1;
@@ -98,32 +98,32 @@ move(MBBill *bill, int mode) {
 static void
 draw_std(MBBill *bill) {
 	if (bill->cargo >= 0)
-		[os OS_draw:bill->cargo :bill->x + bill->x_offset
-			:bill->y + bill->y_offset + 35];
+		[os OS_draw:bill->cargo atX:bill->x + bill->x_offset
+			y:bill->y + bill->y_offset + 35];
 	[ui UI_draw:bill->cels[bill->index] :bill->x :bill->y];
 }
 
 static void
 draw_at(MBBill *bill) {
-	MBComputer *computer = [network Network_get_computer:bill->target_c];
+	MBComputer *computer = [network computerAtIndex:bill->target_c];
 	if (bill->index > 6 && bill->index < 12)
-		[os OS_draw:0 :bill->x + bill->sx :bill->y + bill->sy];
+		[os OS_draw:0 atX:bill->x + bill->sx y:bill->y + bill->sy];
 	if (bill->cargo >= 0)
-		[os OS_draw:bill->cargo :bill->x + bill->x_offset
-			:bill->y + bill->y_offset];
+		[os OS_draw:bill->cargo atX:bill->x + bill->x_offset
+			y:bill->y + bill->y_offset];
 	[ui UI_draw:bill->cels[bill->index] :computer->x :computer->y];
 }
 
 static void
 draw_stray(MBBill *bill) {
-	[os OS_draw:bill->cargo :bill->x :bill->y];
+	[os OS_draw:bill->cargo atX:bill->x y:bill->y];
 }
 
 /*  Update Bill's position */	
 static void
 update_in(MBBill *bill) {
 	int moved = move(bill, SLOW);
-	MBComputer *computer = [network Network_get_computer:bill->target_c];
+	MBComputer *computer = [network computerAtIndex:bill->target_c];
 	if (!moved && computer->os != OS_WINGDOWS && !computer->busy) {
 		computer->busy = 1;
 		bill->cels = acels;
@@ -134,11 +134,11 @@ update_in(MBBill *bill) {
 	else if (!moved) {
 		int i;
 		do {
-			i = RAND(0, [network Network_num_computers] - 1);
+			i = RAND(0, [network countOfComputers] - 1);
 		} while (i == bill->target_c);
-		computer = [network Network_get_computer:i];
+		computer = [network computerAtIndex:i];
 		bill->target_c = i;
-		bill->target_x = computer->x + [computer Computer_width] - BILL_OFFSET_X;
+		bill->target_x = computer->x + [computer width] - BILL_OFFSET_X;
 		bill->target_y = computer->y + BILL_OFFSET_Y;
 	}
 	bill->index++;
@@ -149,7 +149,7 @@ update_in(MBBill *bill) {
 /*  Update Bill standing at a computer */
 static void
 update_at(MBBill *bill) {
-	MBComputer *computer = [network Network_get_computer:bill->target_c];
+	MBComputer *computer = [network computerAtIndex:bill->target_c];
 	if (bill->index == 0 && computer->os == OS_OFF) {
 		bill->index = 6;
 		if (computer->stray == NULL)
@@ -171,7 +171,7 @@ update_at(MBBill *bill) {
 		computer->busy = 0;
 		return;
 	}
-	bill->y_offset = height - [os OS_height];
+	bill->y_offset = height - [os height];
 	switch (bill->index) {
 	case 1: 
 	case 2:
@@ -192,8 +192,8 @@ update_at(MBBill *bill) {
 		break;
 	case 6:
 		if (computer->os != OS_OFF) {
-			[network Network_inc_counter:NETWORK_COUNTER_BASE: -1];
-			[network Network_inc_counter:NETWORK_COUNTER_OFF: 1];
+			[network incrementCounter:NETWORK_COUNTER_BASE byValue: -1];
+			[network incrementCounter:NETWORK_COUNTER_OFF byValue: 1];
 			bill->cargo = computer->os;
 		}
 		else {
@@ -229,8 +229,8 @@ update_at(MBBill *bill) {
 		bill->sy = 0;
 		bill->sx = -7;
 		computer->os = OS_WINGDOWS;
-		[network Network_inc_counter:NETWORK_COUNTER_OFF: -1];
-		[network Network_inc_counter:NETWORK_COUNTER_WIN: 1];
+		[network incrementCounter:NETWORK_COUNTER_OFF byValue: -1];
+		[network incrementCounter:NETWORK_COUNTER_WIN byValue: 1];
 		break;
 	case 12:
 		bill->x += 11;
@@ -241,7 +241,7 @@ update_at(MBBill *bill) {
 /* Updates Bill fleeing with his ill gotten gain */
 static void
 update_out(MBBill *bill) {
-	int screensize = [game Game_screensize];
+	int screensize = [game screenSize];
 	if ([ui UI_intersect:bill->x :bill->y :width :height :0 :0
 			 :screensize :screensize])
 	{
@@ -252,8 +252,8 @@ update_out(MBBill *bill) {
 	}
 	else {
 		[horde Horde_remove_bill:bill];
-		[horde Horde_inc_counter:HORDE_COUNTER_ON :-1];
-		[horde Horde_inc_counter:HORDE_COUNTER_OFF :1];
+		[horde Horde_inc_counter:HORDE_COUNTER_ON value:-1];
+		[horde Horde_inc_counter:HORDE_COUNTER_OFF value:1];
 	}
 }
 
@@ -273,11 +273,12 @@ update_dying(MBBill *bill) {
 			[horde Horde_move_bill:bill];
 			bill->state = BILL_STATE_STRAY;
 		}
-		[horde Horde_inc_counter:HORDE_COUNTER_ON :-1];
+		[horde Horde_inc_counter:HORDE_COUNTER_ON value:-1];
 	}
 }
 
 @implementation MBBill
+@synthesize state;
 
 + (void)Bill_class_init:g :h :n :o :u
 {
@@ -303,18 +304,18 @@ update_dying(MBBill *bill) {
 	bill->cargo = OS_WINGDOWS;
 	bill->x_offset = -2;
 	bill->y_offset = -15;
-	bill->target_c = RAND(0, [network Network_num_computers] - 1);
-	computer = [network Network_get_computer:bill->target_c];
-	bill->target_x = computer->x + [computer Computer_width] - BILL_OFFSET_X;
+	bill->target_c = RAND(0, [network countOfComputers] - 1);
+	computer = [network computerAtIndex:bill->target_c];
+	bill->target_x = computer->x + [computer width] - BILL_OFFSET_X;
 	bill->target_y = computer->y + BILL_OFFSET_Y;
-	[horde Horde_inc_counter:HORDE_COUNTER_ON: 1];
-	[horde Horde_inc_counter:HORDE_COUNTER_OFF: -1];
+	[horde Horde_inc_counter:HORDE_COUNTER_ON value: 1];
+	[horde Horde_inc_counter:HORDE_COUNTER_OFF value: -1];
 	bill->prev = NULL;
 	bill->next = NULL;
 	return bill;
 }
 
-- (void)Bill_draw
+- (void)draw
 {
 	switch (state) {
 		case BILL_STATE_IN:
@@ -333,7 +334,7 @@ update_dying(MBBill *bill) {
 	}
 }
 
-- (void)Bill_update
+- (void)update
 {
 	switch (state) {
 		case BILL_STATE_IN:
@@ -353,7 +354,7 @@ update_dying(MBBill *bill) {
 	}
 }
 
-- (void)Bill_set_dying
+- (void)killBill
 {
 	index = -1;
 	cels = dcels;
@@ -362,16 +363,16 @@ update_dying(MBBill *bill) {
 	state = BILL_STATE_DYING;
 }
 
-- (int)Bill_clicked:(int)locx :(int)locy
+- (BOOL)clickedAtX:(int)locx y:(int)locy
 {
 	return (locx > x && locx < x + width &&
 		locy > y && locy < y + height);
 }
 
-- (int)Bill_clickedstray:(int)locx :(int)locy
+- (BOOL)clickedStrayAtX:(int)locx y:(int)locy
 {
-	return (locx > x && locx < x + [os OS_width] &&
-		locy > y && locy < y + [os OS_height]);
+	return (locx > x && locx < x + [os width] &&
+		locy > y && locy < y + [os height]);
 }
 
 + (void)Bill_load_pix
@@ -393,19 +394,14 @@ update_dying(MBBill *bill) {
 		[ui UI_load_picture_indexed:"billA" :i :1 :&acels[i]];
 }
 
-+ (int)Bill_width
++ (int)width
 {
 	return width;
 }
 
-- (int)Bill_height
+- (int)height
 {
 	return height;
-}
-
-- (int)Bill_get_state
-{
-	return state;
 }
 
 @end

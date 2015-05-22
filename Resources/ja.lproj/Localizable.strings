@@ -1,0 +1,23 @@
+/* Dialog boxes */
+
+"newgame_dialog_str_title" = "新規ゲーム？";
+"newgame_dialog_str_msg" = "";
+"newgame_dialog_str_btn1" = "OK";
+"newgame_dialog_str_btn2" = "キャンセル";
+
+"quit_dialog_str_title" = "StepBill を終了しますか？";
+"quit_dialog_str_msg" = "";
+"quit_dialog_str_btn1" = "OK";
+"quit_dialog_str_btn2" = "キャンセル";
+
+"pause_dialog_str_title" = "ポーズ中";
+"pause_dialog_str_msg" = "再開を押すとポーズを解除します。";
+"pause_dialog_str_btn1" = "再開";
+
+"endgame_dialog_str_title" = "ゲームオーバー";
+"endgame_dialog_str_msg" = "モジュール StepBill はメモリアドレス 097E:F1A0 で\nセグメンテーション・フォールトをおこしました。\nコアダンプします。\n\nご不便をおかけして申し訳ありません。";
+"endgame_dialog_str_btn1" = "チッ！";
+
+"score_dialog_str_title" = "クリア！";
+"score_dialog_str_msg" = "レベル %d 終了：\n得点： %d";
+"score_dialog_str_btn1" = "やったね！";

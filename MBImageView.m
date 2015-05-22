@@ -11,8 +11,8 @@ static float transparency = 0.7f;
 {
 	NSPoint p = [theEvent locationInWindow];
 	p = [self convertPoint:p fromView:nil];
-  [aqua aqua_button_press:p.x :p.y];
-//r	[aqua aqua_button_press:p.x :400-(NSHeight(_bounds) - p.y)];
+	[aqua pressButtonAtX:p.x y:p.y];
+//r	[aqua pressButtonAtX:p.x :400-(NSHeight(_bounds) - p.y)];
 	// NSLog(@"mouseDown %@ %@",NSStringFromPoint(p),NSHeight(_bounds)); 
 
 	cursor = p;
@@ -23,8 +23,8 @@ static float transparency = 0.7f;
 {
 	NSPoint p = [theEvent locationInWindow];
 	p = [self convertPoint:p fromView:nil];
-  [aqua aqua_button_release:p.x :p.y];
-//r	[aqua aqua_button_release:p.x :400-(NSHeight(_bounds) - p.y)];
+	[aqua releaseButtonAtX:p.x y:p.y];
+//r	[aqua releaseButtonAtX:p.x :400-(NSHeight(_bounds) - p.y)];
 	// NSLog(@"mouseUp %@ %@",NSStringFromPoint(p),NSHeight(_bounds)); 
 }
 

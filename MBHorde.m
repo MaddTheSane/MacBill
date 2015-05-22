@@ -82,19 +82,19 @@ launch(int max) {
 		UNLINK(bill, strays);
 		[bill release];
 	}
-	counters[HORDE_COUNTER_OFF] = [self on:[game Game_level]];
+	counters[HORDE_COUNTER_OFF] = [self on:[game level]];
 	counters[HORDE_COUNTER_ON] = 0;
 }
 
 - (void)Horde_update:(int)iteration
 {
 	MBBill *bill, *next;
-	int level = [game Game_level];
+	int level = [game level];
 	if (iteration % between(level) == 0)
 		launch(max_at_once(level));
 	for (bill = alive; bill != NULL; bill = next) {
 		next = bill->next;
-		[bill Bill_update];
+		[bill update];
 	}
 }
 
@@ -103,9 +103,9 @@ launch(int max) {
 	MBBill *bill;
 
 	for (bill = strays; bill != NULL; bill = bill->next)
-		[bill Bill_draw];
+		[bill draw];
 	for (bill = alive; bill != NULL; bill = bill->next)
-		[bill Bill_draw];
+		[bill draw];
 }
 
 - (void)Horde_move_bill:(MBBill *)bill
@@ -120,7 +120,7 @@ launch(int max) {
 		UNLINK(bill, strays);
 	else
 		UNLINK(bill, alive);
-	[network Network_clear_stray:bill];
+	[network clearStray:bill];
 	[bill release];
 }
 
@@ -132,12 +132,12 @@ launch(int max) {
 		PREPEND(bill, alive);
 }
 
-- (MBBill *)Horde_clicked_stray:(int)x :(int)y
+- (MBBill *)Horde_clicked_stray:(int)x y:(int)y
 {
 	MBBill *bill;
 
 	for (bill = strays; bill != NULL; bill = bill->next) {
-		if (![bill Bill_clickedstray:x :y])
+		if (![bill clickedStrayAtX:x y:y])
 			continue;
 		UNLINK(bill, strays);
 		return bill;
@@ -145,28 +145,28 @@ launch(int max) {
 	return NULL;
 }
 
-- (int)Horde_process_click:(int)x :(int)y
+- (int)Horde_process_click:(int)x y:(int)y
 {
 	MBBill *bill;
 	int counter = 0;
 
 	for (bill = alive; bill != NULL; bill = bill->next) {
 		if (bill->state == BILL_STATE_DYING ||
-		    ![bill Bill_clicked:x :y])
+		    ![bill clickedAtX:x y:y])
 			continue;
 		if (bill->state == BILL_STATE_AT) {
 			MBComputer *comp;
-			comp = [network Network_get_computer:bill->target_c];
+			comp = [network computerAtIndex:bill->target_c];
 			comp->busy = 0;
 			comp->stray = bill;
 		}
-		[bill Bill_set_dying];
+		[bill killBill];
        	counter++;
 	}
 	return counter;
 }
 
-- (void)Horde_inc_counter:(int)counter :(int)val
+- (void)Horde_inc_counter:(int)counter value:(int)val
 {
 	counters[counter] += val;
 }

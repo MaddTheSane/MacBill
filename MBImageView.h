@@ -3,9 +3,11 @@
 /* #import <Cocoa/Cocoa.h> */
 #import <AppKit/AppKit.h>
 
+@class MBAqua;
+
 @interface MBImageView : NSImageView
 {
-    IBOutlet id aqua;
+    IBOutlet MBAqua *aqua;
 	NSImage *subimage;
 	NSPoint cursor;
 	BOOL drawCursor;

@@ -4,26 +4,33 @@
 #import <AppKit/AppKit.h>
 
 /* Counters */
-#define NETWORK_COUNTER_OFF 0
-#define NETWORK_COUNTER_BASE 1
-#define NETWORK_COUNTER_WIN 2
+typedef NS_ENUM(int, NETWORK_COUNTER) {
+	NETWORK_COUNTER_OFF = 0,
+	NETWORK_COUNTER_BASE,
+	NETWORK_COUNTER_WIN
 #define NETWORK_COUNTER_MAX 2
+};
+
+@class MBGame;
+@class MBComputer;
+@class MBCable;
+@class MBBill;
 
 @interface MBNetwork : NSObject
 {
-    IBOutlet id game;
+    IBOutlet MBGame *game;
 }
 
 - (void)Network_setup;
 - (void)Network_draw;
 - (void)Network_update;
 - (void)Network_toasters;
-- Network_get_computer:(int)index;
-- (int)Network_num_computers;
-- Network_get_cable:(int)index;
-- (int)Network_num_cables;
-- (void)Network_clear_stray:bill;
-- (void)Network_inc_counter:(int)counter :(int)val;
-- (int)Network_get_counter:(int)counter;
+- (MBComputer *)computerAtIndex:(int)index;
+@property (readonly) int countOfComputers;
+- (MBCable *)cableAtIndex:(int)index;
+@property (readonly) int countOfCables;
+- (void)clearStray:(MBBill *)bill;
+- (void)incrementCounter:(NETWORK_COUNTER)counter byValue:(int)val;
+- (int)countOfCounter:(NETWORK_COUNTER)counter;
 
 @end

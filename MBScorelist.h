@@ -3,17 +3,19 @@
 /* #import <Cocoa/Cocoa.h> */
 #import <AppKit/AppKit.h>
 
-@interface MBScorelist : NSObject
+@class MBUI;
+
+@interface MBScorelist : NSObject <NSTableViewDataSource>
 {
-    IBOutlet id ui;
+    IBOutlet MBUI *ui;
 }
 
-- (void)Scorelist_read;
-- (void)Scorelist_write;
-- (void)Scorelist_recalc:(const char *)str :(int)level :(int)score;
-- (int)Scorelist_ishighscore:(int)val;
-
-- (int)numberOfRowsInTableView:(NSTableView *)aTableView;
-- (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(int)rowIndex;
+- (void)readScoreList;
+- (void)writeScoreList;
+/*!
+ *  Add new high score to list
+ */
+- (void)addScoreWithName:(NSString*)str level:(int)level score:(int)score;
+- (BOOL)isHighScore:(int)val;
 
 @end

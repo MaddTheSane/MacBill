@@ -11,28 +11,32 @@ struct MBPicture {
 	NSImage *img;
 };
 
-@interface MBAqua : NSObject
+@class MBUI;
+@class MBGame;
+@class MBImageView;
+
+@interface MBAqua : NSObject <NSApplicationDelegate>
 {
-    IBOutlet id game;
-    IBOutlet id ui;
+    IBOutlet MBGame *game;
+    IBOutlet MBUI *ui;
 
-    IBOutlet id about;
-    IBOutlet id story;
-    IBOutlet id rules;
-    IBOutlet id warp;
-    IBOutlet id entry;
-    IBOutlet id highscore;
-    IBOutlet id view;
+    IBOutlet NSPanel *about;
+    IBOutlet NSWindow *story;
+    IBOutlet NSWindow *rules;
+    IBOutlet NSTextField *warp;
+    IBOutlet NSTextField *entry;
+    IBOutlet NSPanel *highscore;
+    IBOutlet MBImageView *view;
 
-    IBOutlet id menu_pause;
-    IBOutlet id text_size;
-    IBOutlet id text_timer;
-    IBOutlet id text_trans;
-    IBOutlet id slider_size;
-    IBOutlet id slider_timer;
-    IBOutlet id slider_trans;
-    IBOutlet id rules_tv;
-    IBOutlet id story_tv;
+    IBOutlet NSMenuItem *menu_pause;
+    IBOutlet NSTextField *text_size;
+    IBOutlet NSTextField *text_timer;
+    IBOutlet NSTextField *text_trans;
+    IBOutlet NSSlider *slider_size;
+    IBOutlet NSSlider *slider_timer;
+    IBOutlet NSSlider *slider_trans;
+    IBOutlet NSTextView *rules_tv;
+    IBOutlet NSTextView *story_tv;
 }
 
 - (void)aqua_set_cursor:(MBMCursor *)cursor;
@@ -66,12 +70,9 @@ struct MBPicture {
 - (IBAction)modalOk:(id)sender;
 - (IBAction)modalCancel:(id)sender;
 
-- (void)aqua_button_press:(int)x :(int)y;
-- (void)aqua_button_release:(int)x :(int)y;
+- (void)pressButtonAtX:(int)x y:(int)y;
+- (void)releaseButtonAtX:(int)x y:(int)y;
 
-- (void)applicationDidFinishLaunching:(NSNotification *)notification;
-- (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender;
-
-- (BOOL)validateMenuItem:(id <NSMenuItem>)menuItem;
+- (BOOL)validateMenuItem:(NSMenuItem*)menuItem;
 
 @end

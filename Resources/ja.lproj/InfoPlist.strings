@@ -1,0 +1,6 @@
+﻿/* Localized versions of Info.plist keys */
+
+CFBundleName = "MacBill";
+CFBundleShortVersionString = "MacBill version 1.1";
+CFBundleGetInfoString = "MacBill version 1.1, Copyright 2002 Ishioka Hiroshi";
+NSHumanReadableCopyright = "Copyright 2001-2002 Ishioka Hiroshi";

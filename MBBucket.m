@@ -21,19 +21,19 @@ static int grabbed;
 	[ui UI_load_cursor:"bucket" :CURSOR_OWN_MASK :&cursor];
 }
 
-- (int)Bucket_clicked:(int)x :(int)y
+- (BOOL)clickedAtX:(int)x y:(int)y
 {
 	return (x > 0 && x < [ui UI_picture_width:picture] &&
 		y > 0 && y < [ui UI_picture_height:picture]);
 }
 
-- (void)Bucket_draw
+- (void)draw
 {
 	if (!grabbed)
 		[ui UI_draw:picture :0 :0];
 }
 
-- (void)Bucket_grab:(int)x :(int)y
+- (void)grabAtX:(int)x y:(int)y
 {
 	UNUSED(x);
 	UNUSED(y);
@@ -42,13 +42,13 @@ static int grabbed;
 	grabbed = 1;
 }
 
-- (void)Bucket_release:(int)x :(int)y
+- (void)releaseAtX:(int)x y:(int)y
 {
 	int i;
-	for (i = 0; i < [network Network_num_cables]; i++) {
-		MBCable *cable = [network Network_get_cable:i];
-		if ([cable Cable_onspark:x :y])
-			[cable Cable_reset];
+	for (i = 0; i < [network countOfCables]; i++) {
+		MBCable *cable = [network cableAtIndex:i];
+		if ([cable Cable_onspark:x y:y])
+			[cable reset];
 	}
 	grabbed = 0;
 }

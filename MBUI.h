@@ -6,22 +6,26 @@
 #define CURSOR_SEP_MASK 0
 #define CURSOR_OWN_MASK 1
 
-#define DIALOG_NEWGAME 0
-#define DIALOG_PAUSEGAME 1
-#define DIALOG_WARPLEVEL 2
-#define DIALOG_HIGHSCORE 3
-#define DIALOG_QUITGAME 4
-#define DIALOG_STORY 5
-#define DIALOG_RULES 6
-#define DIALOG_ABOUT 7
-#define DIALOG_SCORE 8
-#define DIALOG_ENDGAME 9
-#define DIALOG_ENTERNAME 10
+typedef NS_ENUM(NSInteger, DialogContants) {
+	DIALOG_NEWGAME = 0,
+	DIALOG_PAUSEGAME,
+	DIALOG_WARPLEVEL,
+	DIALOG_HIGHSCORE,
+	DIALOG_QUITGAME,
+	DIALOG_STORY,
+	DIALOG_RULES,
+	DIALOG_ABOUT,
+	DIALOG_SCORE,
+	DIALOG_ENDGAME,
+	DIALOG_ENTERNAME
 #define DIALOG_MAX 10
+};
+
+@class MBAqua;
 
 @interface MBUI : NSObject
 {
-    IBOutlet id aqua;
+    IBOutlet MBAqua *aqua;
 }
 
 - (void)UI_restart_timer;

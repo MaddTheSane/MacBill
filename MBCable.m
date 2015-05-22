@@ -11,22 +11,23 @@
 #import "MBOS.h"
 #import "MBSpark.h"
 #import "MBUI.h"
+#include <tgmath.h>
 
 static MBGame *game;
 static MBNetwork *network;
 static MBSpark *spark;
 static MBUI *ui;
 
-#define SWAP(x, y) do {int _t; _t = x; x = y; y = _t;} while(0)
-
-static void
-reverse(MBCable *cable) {
-	SWAP(cable->c1, cable->c2);
-	SWAP(cable->x1, cable->x2);
-	SWAP(cable->y1, cable->y2);
-}
+#define SWAP(x, y) do {typeof(x) _t; _t = x; x = y; y = _t;} while(0)
 
 @implementation MBCable
+
+- (void)reverse
+{
+	SWAP(c1, c2);
+	SWAP(x1, x2);
+	SWAP(y1, y2);
+}
 
 + (void)Cable_class_init:g :n :s :u
 {
@@ -44,18 +45,18 @@ reverse(MBCable *cable) {
 
 	cable = [[self alloc] init];
 
-	cable->c1 = RAND(0, [network Network_num_computers] - 1);
+	cable->c1 = RAND(0, [network countOfComputers] - 1);
 	do {
-		cable->c2 = RAND(0, [network Network_num_computers] - 1);
+		cable->c2 = RAND(0, [network countOfComputers] - 1);
 	} while (cable->c2 == cable->c1);
 	cable->active = 0;
 	cable->index = 0;
-	cable->delay = SPARK_DELAY([game Game_level]);
+	cable->delay = SPARK_DELAY([game level]);
 
-	comp1 = [network Network_get_computer:cable->c1];
-	comp2 = [network Network_get_computer:cable->c2];
-	cwidth = [comp1 Computer_width];
-	cheight = [comp1 Computer_height];
+	comp1 = [network computerAtIndex:cable->c1];
+	comp2 = [network computerAtIndex:cable->c2];
+	cwidth = [comp1 width];
+	cheight = [comp1 height];
 	cable->x1 = comp1->x + cwidth/3;
 	cable->x2 = comp2->x + cwidth/3;
 	cable->y1 = comp1->y + cheight/2;
@@ -64,21 +65,21 @@ reverse(MBCable *cable) {
 	return cable;
 }
 
-- (void)Cable_draw
+- (void)draw
 {
 	[ui UI_draw_line:x1 :y1 :x2 :y2];
 	if (active) {
 		int rx = x - [spark Spark_width]/2;
 		int ry = y - [spark Spark_height]/2;
-		[spark Spark_draw:rx :ry :index];
+		[spark drawAtX:rx y:ry index:index];
 	}
 }
 
-- (void)Cable_update
+- (void)update
 {
 	MBComputer *comp1, *comp2;
-	comp1 = [network Network_get_computer:c1];
-	comp2 = [network Network_get_computer:c2];
+	comp1 = [network computerAtIndex:c1];
+	comp2 = [network computerAtIndex:c2];
 
 	if (active) {
 		if ((comp1->os == OS_WINGDOWS) == (comp2->os == OS_WINGDOWS))
@@ -88,7 +89,7 @@ reverse(MBCable *cable) {
 			float sx, sy;
 
 			if (comp2->os == OS_WINGDOWS)
-				reverse(self);
+				[self reverse];
 
 			xdist = x2 - x;
 			ydist = y2 - y;
@@ -104,9 +105,9 @@ reverse(MBCable *cable) {
 						counter = NETWORK_COUNTER_OFF;
 					else
 						counter = NETWORK_COUNTER_BASE;
-					[network Network_inc_counter:counter :-1];
-					[network Network_inc_counter:NETWORK_COUNTER_WIN
-							    :1];
+					[network incrementCounter:counter byValue:-1];
+					[network incrementCounter:NETWORK_COUNTER_WIN
+							    byValue:1];
 					comp2->os = OS_WINGDOWS;
 				}
 				active = 0;
@@ -129,9 +130,9 @@ reverse(MBCable *cable) {
 			;
 		else if (comp1->os == OS_WINGDOWS || comp2->os == OS_WINGDOWS) {
 			active = 1;
-			delay = SPARK_DELAY([game Game_level]);
+			delay = SPARK_DELAY([game level]);
 			if (comp2->os == OS_WINGDOWS)
-				reverse(self);
+				[self reverse];
 			x = x1;
 			fx = x1;
 			y = y1;
@@ -140,7 +141,7 @@ reverse(MBCable *cable) {
 	}
 }
 
-- (int)Cable_onspark:(int)locx :(int)locy
+- (int)Cable_onspark:(int)locx y:(int)locy
 {
 	if (!active)
 		return 0;
@@ -148,10 +149,10 @@ reverse(MBCable *cable) {
 		abs(locy - y) < [spark Spark_height]);
 }
 
-- (void)Cable_reset
+- (void)reset
 {
 	active = 0;
-	delay = SPARK_DELAY([game Game_level]);
+	delay = SPARK_DELAY([game level]);
 }
 
 @end

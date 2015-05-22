@@ -4,11 +4,13 @@
 #import <AppKit/AppKit.h>
 
 /* Bill's states */
-#define BILL_STATE_IN 1
-#define BILL_STATE_AT 2
-#define BILL_STATE_OUT 3
-#define BILL_STATE_DYING 4
-#define BILL_STATE_STRAY 5
+typedef NS_ENUM(int, BillState) {
+	BILL_STATE_IN = 1,
+	BILL_STATE_AT,
+	BILL_STATE_OUT,
+	BILL_STATE_DYING,
+	BILL_STATE_STRAY
+};
 
 /* Offsets from upper right of computer */
 /* #define BILL_OFFSET_X 20 */
@@ -18,7 +20,7 @@
 @interface MBBill : NSObject
 {
 @public
-	int state;		/* what is it doing? */
+	BillState state;		/* what is it doing? */
 	int index;		/* index of animation frame */
 	MBPicture **cels;		/* array of animation frames */
 	int x, y;		/* location */
@@ -32,17 +34,17 @@
 	MBBill *prev, *next;
 }
 
+@property (readonly) BillState state;
+@property (readonly) int height;
 + (void)Bill_class_init:g :h :n :o :u;
 
-+ Bill_enter;
-- (void)Bill_draw;
-- (void)Bill_update;
-- (void)Bill_set_dying;
-- (int)Bill_clicked:(int)locx :(int)locy;
-- (int)Bill_clickedstray:(int)locx :(int)locy;
++ (instancetype)Bill_enter;
+- (void)draw;
+- (void)update;
+- (void)killBill;
+- (BOOL)clickedAtX:(int)locx y:(int)locy;
+- (BOOL)clickedStrayAtX:(int)locx y:(int)locy;
 + (void)Bill_load_pix;
-+ (int)Bill_width;
-- (int)Bill_height;
-- (int)Bill_get_state;
++ (int)width;
 
 @end

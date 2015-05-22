@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ApplicationDescription</key>
+	<string>StepBill - XBill for GNUstep (based on MacBill)</string>
+	<key>ApplicationName</key>
+	<string>StepBill</string>
+	<key>ApplicationRelease</key>
+	<string>2.4 - 01/08/2005</string>
+	<key>ApplicationURL</key>
+	<string>http://www.linuks.mine.nu/stepbill/</string>
+	<key>Authors</key>
+	<array>
+		<string>Rob Burns &lt;rburns@softhome.net&gt;</string>
+		<string>Banlu Kemiyatorn &lt;id@project-ile.net&gt;</string>
+		<string>Gürkan Sengün &lt;gurkan@linuks.mine.nu&gt;</string>
+	</array>
+	<key>CFBundleExecutable</key>
+	<string>${EXECUTABLE_NAME}</string>
+	<key>CFBundleIdentifier</key>
+	<string>nu.mine.linkus.$(PRODUCT_NAME:rfc1034identifier)</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>2.4</string>
+	<key>CFBundleSignature</key>
+	<string>StBl</string>
+	<key>CopyrightDescription</key>
+	<string>This program is released under the GNU GPL</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>${MACOSX_DEPLOYMENT_TARGET}</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>Copyright © 2004 Rob Burns, Gürkan Sengün, Banlu Kemiyatorn</string>
+	<key>NSIcon</key>
+	<string>icon.tiff</string>
+	<key>NSMainNibFile</key>
+	<string>StepBill</string>
+	<key>NSPrincipalClass</key>
+	<string>NSApplication</string>
+</dict>
+</plist>

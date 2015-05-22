@@ -6,79 +6,105 @@
 #define NAMELEN 20
 #define SCORES 10
 
-static NSMutableArray *scores;
+#define kHighName @"name"
+#define kHighLevel @"level"
+#define kHighScore @"score"
 
 @implementation MBScorelist
+{
+	NSMutableArray *scores;
+}
 
-- (void)Scorelist_read
+- (void)readScoreList
 {
 	id tmpArray;
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	scores = [[NSMutableArray alloc] init];
 	if ((tmpArray = [defaults arrayForKey:@"scores"]) != nil) {
 		[scores setArray:tmpArray];
-	} else {
-		int i;
-		NSValue *zero = [NSNumber numberWithInt:0];
-		for (i = 0; i < SCORES; i++) {
-			NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-			[dict setObject:@"Anonymous" forKey:@"name"];
-			[dict setObject:zero forKey:@"level"];
-			[dict setObject:zero forKey:@"score"];
-			[scores addObject:dict];
-		}
 	}
+	
+	//Fill out any missing values
+	NSNumber *zero = @0;
+	while (scores.count < SCORES) {
+		NSDictionary *dict = @{kHighName: @"Anonymous",
+							   kHighLevel: zero,
+							   kHighScore: zero};
+		[scores addObject:dict];
+	}
+	
+	//Ensure all values are of the proper type
+	NSArray *maybeBadScores = [scores copy];
+	for (NSInteger i = 0; i < SCORES; i++) {
+		NSDictionary *badScore = maybeBadScores[i];
+		NSMutableDictionary *goodScore = [badScore mutableCopy];
+		goodScore[kHighLevel] = @([badScore[kHighLevel] integerValue]);
+		goodScore[kHighScore] = @([badScore[kHighScore] integerValue]);
+
+		scores[i] = goodScore;
+		[goodScore release];
+	}
+	
+	[maybeBadScores release];
 }
 
-- (void)Scorelist_write
+- (void)sortScores
+{
+	[scores sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+		NSDictionary *dict1 = obj1;
+		NSDictionary *dict2 = obj2;
+		
+		NSNumber *score1 = dict1[kHighScore];
+		NSNumber *score2 = dict2[kHighScore];
+		
+		return [score1 compare:score2];
+	}];
+}
+
+- (void)writeScoreList
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	[defaults setObject:scores forKey:@"scores"];
 	[defaults synchronize];
 }
 
-/*  Add new high score to list   */
-- (void)Scorelist_recalc:(const char *)str :(int)level :(int)score
+- (void)addScoreWithName:(NSString*)str level:(int)level score:(int)score;
 {
-	int i;
-	NSMutableDictionary *dict;
-        NSString *strName;
-
-	if ([[[scores objectAtIndex:SCORES - 1] objectForKey:@"score"] intValue] >= score)
-		return;
-	for (i = SCORES - 1; i > 0; i--) {
-		if ([[[scores objectAtIndex:i - 1] objectForKey:@"score"] intValue] >= score) {
-			break;
-		}
+	NSDictionary *dict;
+	
+	if (str == NULL || str.length == 0) {
+		str = @"Anonymous";
 	}
-
-	if (str == NULL || str[0] == 0) {
-		strName = @"Anonymous";
-	} else {
-		strName = [NSString stringWithCString:str];
-        }
-
-	dict = [NSMutableDictionary dictionary];
-	[dict setObject:strName forKey:@"name"];
-	[dict setObject:[NSNumber numberWithInt:level] forKey:@"level"];
-	[dict setObject:[NSNumber numberWithInt:score] forKey:@"score"];
-
-	[scores insertObject:dict atIndex:i];
+	
+	dict = @{kHighName: str,
+			 kHighLevel: @(level),
+			 kHighScore: @(score)};
+	
+	[scores addObject:dict];
+	
+	[self sortScores];
+	
 	[scores removeLastObject];
 }
 
-- (int)Scorelist_ishighscore:(int)val
+- (BOOL)isHighScore:(int)val
 {
-	return (val > [[[scores objectAtIndex:SCORES - 1] objectForKey:@"score"] intValue]);
+	return (val > [[[scores objectAtIndex:SCORES - 1] objectForKey:kHighScore] intValue]);
 }
 
+- (void)dealloc
+{
+	[scores release]; scores = nil;
+	
+	[super dealloc];
+}
 
-- (int)numberOfRowsInTableView:(NSTableView *)aTableView
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView
 {
     return (SCORES);
 }
 
-- (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(int)rowIndex
+- (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex
 {
 	id theRecord, theValue;
 	NSParameterAssert(rowIndex >= 0 && rowIndex < SCORES);

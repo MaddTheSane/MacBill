@@ -18,9 +18,9 @@
 + (void)Cable_class_init:g :n :s :u;
 
 + (MBCable *)Cable_setup;
-- (void)Cable_draw;
-- (void)Cable_update;
-- (int)Cable_onspark:(int)locx :(int)locy;
-- (void)Cable_reset;
+- (void)draw;
+- (void)update;
+- (int)Cable_onspark:(int)locx y:(int)locy;
+- (void)reset;
 
 @end

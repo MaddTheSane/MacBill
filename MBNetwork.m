@@ -29,7 +29,7 @@ static int counters[NETWORK_COUNTER_MAX + 1]; 	/* number in each state */
 - (void)Network_setup
 {
 	int i;	
-	ncomputers = [self on:[game Game_level]];
+	ncomputers = [self on:[game level]];
 	if (computers != nil)
 		while ([computers count] != 0) {
 			[[computers objectAtIndex:0] release];
@@ -56,7 +56,7 @@ static int counters[NETWORK_COUNTER_MAX + 1]; 	/* number in each state */
 	counters[NETWORK_COUNTER_OFF] = 0;
 	counters[NETWORK_COUNTER_BASE] = ncomputers;
 	counters[NETWORK_COUNTER_WIN] = 0;
-	ncables = MIN([game Game_level], ncomputers/2);
+	ncables = MIN([game level], ncomputers/2);
 	cables = [[NSMutableArray alloc] init];
 	for (i = 0; i < ncables; i++)
 		[cables addObject:[MBCable Cable_setup]];
@@ -67,16 +67,16 @@ static int counters[NETWORK_COUNTER_MAX + 1]; 	/* number in each state */
 {
 	int i;
 	for (i = 0; i < ncables; i++)
-		[[cables objectAtIndex:i] Cable_draw];
+		[(MBCable*)[cables objectAtIndex:i] draw];
 	for (i = 0; i < ncomputers; i++)
-		[[computers objectAtIndex:i] Computer_draw];
+		[(MBComputer*)[computers objectAtIndex:i] draw];
 }
 
 - (void)Network_update
 {
 	int i;
 	for (i = 0; i < ncables; i++)
-		[[cables objectAtIndex:i] Cable_update];
+		[(MBCable*)[cables objectAtIndex:i] update];
 }
 
 - (void)Network_toasters
@@ -89,27 +89,27 @@ static int counters[NETWORK_COUNTER_MAX + 1]; 	/* number in each state */
 	ncables = 0;
 }
 
-- (MBComputer *)Network_get_computer:(int)index
+- (MBComputer *)computerAtIndex:(int)index
 {
 	return [computers objectAtIndex:index];
 }
 
-- (int)Network_num_computers
+- (int)countOfComputers
 {
 	return ncomputers;
 }
 
-- (MBCable *)Network_get_cable:(int)index
+- (MBCable *)cableAtIndex:(int)index
 {
 	return [cables objectAtIndex:index];
 }
 
-- (int)Network_num_cables
+- (int)countOfCables
 {
 	return ncables;
 }
 
-- (void)Network_clear_stray:(MBBill *)bill
+- (void)clearStray:(MBBill *)bill
 {
 	int i;
 	for (i = 0; i < ncomputers; i++) {
@@ -118,12 +118,12 @@ static int counters[NETWORK_COUNTER_MAX + 1]; 	/* number in each state */
 	}
 }
 
-- (void)Network_inc_counter:(int)counter :(int)val
+- (void)incrementCounter:(NETWORK_COUNTER)counter byValue:(int)val
 {
 	counters[counter] += val;
 }
 
-- (int)Network_get_counter:(int)counter
+- (int)countOfCounter:(NETWORK_COUNTER)counter
 {
 	return counters[counter];
 }

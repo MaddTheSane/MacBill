@@ -7,7 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		552FF99F1B0FCEEC0005A4F5 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 552FF99E1B0FCEEC0005A4F5 /* Media.xcassets */; };
+		552FF9A61B0FD6A90005A4F5 /* ahh0.wav in Resources */ = {isa = PBXBuildFile; fileRef = 552FF9A11B0FD6A90005A4F5 /* ahh0.wav */; };
+		552FF9A71B0FD6A90005A4F5 /* ahh1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 552FF9A21B0FD6A90005A4F5 /* ahh1.wav */; };
+		552FF9A81B0FD6A90005A4F5 /* ahh2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 552FF9A31B0FD6A90005A4F5 /* ahh2.wav */; };
+		552FF9A91B0FD6A90005A4F5 /* ahh3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 552FF9A41B0FD6A90005A4F5 /* ahh3.wav */; };
+		552FF9AA1B0FD6A90005A4F5 /* mssound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 552FF9A51B0FD6A90005A4F5 /* mssound.wav */; };
+		552FF9AE1B0FD8040005A4F5 /* MacBill.icns in Resources */ = {isa = PBXBuildFile; fileRef = 552FF9AD1B0FD8040005A4F5 /* MacBill.icns */; };
 		554572781B0FBE5900E06671 /* rules.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 5545727A1B0FBE5900E06671 /* rules.rtf */; };
 		559AF8F51B0EE4E60015AB87 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 559AF8F41B0EE4E60015AB87 /* main.m */; };
 		559AF92C1B0EE7C40015AB87 /* MBAqua.m in Sources */ = {isa = PBXBuildFile; fileRef = 559AF9101B0EE7C40015AB87 /* MBAqua.m */; };
@@ -84,7 +89,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		552FF99E1B0FCEEC0005A4F5 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
+		552FF9A11B0FD6A90005A4F5 /* ahh0.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ahh0.wav; sourceTree = "<group>"; };
+		552FF9A21B0FD6A90005A4F5 /* ahh1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ahh1.wav; sourceTree = "<group>"; };
+		552FF9A31B0FD6A90005A4F5 /* ahh2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ahh2.wav; sourceTree = "<group>"; };
+		552FF9A41B0FD6A90005A4F5 /* ahh3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ahh3.wav; sourceTree = "<group>"; };
+		552FF9A51B0FD6A90005A4F5 /* mssound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = mssound.wav; sourceTree = "<group>"; };
+		552FF9AB1B0FD6B70005A4F5 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = ja; path = ja.lproj/rules.rtf; sourceTree = "<group>"; };
+		552FF9AC1B0FD73A0005A4F5 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text; name = ja; path = ja.lproj/story.txt; sourceTree = "<group>"; };
+		552FF9AD1B0FD8040005A4F5 /* MacBill.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = MacBill.icns; sourceTree = "<group>"; };
 		554572701B0FB56D00E06671 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/StepBill.xib; sourceTree = "<group>"; };
 		554572741B0FB79800E06671 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/StepBill.strings; sourceTree = "<group>"; };
 		554572751B0FBC9F00E06671 /* bg */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = bg; path = bg.lproj/StepBill.strings; sourceTree = "<group>"; };
@@ -200,6 +212,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		552FF9A01B0FD6A90005A4F5 /* wavs */ = {
+			isa = PBXGroup;
+			children = (
+				552FF9A11B0FD6A90005A4F5 /* ahh0.wav */,
+				552FF9A21B0FD6A90005A4F5 /* ahh1.wav */,
+				552FF9A31B0FD6A90005A4F5 /* ahh2.wav */,
+				552FF9A41B0FD6A90005A4F5 /* ahh3.wav */,
+				552FF9A51B0FD6A90005A4F5 /* mssound.wav */,
+			);
+			path = wavs;
+			sourceTree = "<group>";
+		};
 		559AF8E31B0EE4E60015AB87 = {
 			isa = PBXGroup;
 			children = (
@@ -326,6 +350,8 @@
 		559AF9A71B0EE7DB0015AB87 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				552FF9AD1B0FD8040005A4F5 /* MacBill.icns */,
+				552FF9A01B0FD6A90005A4F5 /* wavs */,
 				559AF9D81B0EE8290015AB87 /* Localizable.strings */,
 				5545727A1B0FBE5900E06671 /* rules.rtf */,
 				559AF9DA1B0EE8290015AB87 /* rules.txt */,
@@ -335,7 +361,6 @@
 				559AF9E91B0EE8290015AB87 /* StepBill.xib */,
 				559AF9B31B0EE7F10015AB87 /* Defaults.plist */,
 				559AF93A1B0EE7D30015AB87 /* tiffs */,
-				552FF99E1B0FCEEC0005A4F5 /* Media.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -412,11 +437,11 @@
 				559AF98B1B0EE7D30015AB87 /* bsd.tiff in Resources */,
 				559AF9F71B0EE8290015AB87 /* StepBill.xib in Resources */,
 				559AF9781B0EE7D30015AB87 /* billA_2.tiff in Resources */,
-				552FF99F1B0FCEEC0005A4F5 /* Media.xcassets in Resources */,
 				559AF9871B0EE7D30015AB87 /* billL_2.tiff in Resources */,
 				559AF9731B0EE7D30015AB87 /* billA_0.tiff in Resources */,
 				559AF9821B0EE7D30015AB87 /* billD_2.tiff in Resources */,
 				559AF9911B0EE7D30015AB87 /* hurd_orig.tiff in Resources */,
+				552FF9A81B0FD6A90005A4F5 /* ahh2.wav in Resources */,
 				559AF99C1B0EE7D30015AB87 /* palm.tiff in Resources */,
 				559AF9951B0EE7D30015AB87 /* logo.tiff in Resources */,
 				559AF9711B0EE7D30015AB87 /* about.tiff in Resources */,
@@ -425,12 +450,14 @@
 				559AF9791B0EE7D30015AB87 /* billA_3.tiff in Resources */,
 				559AF99A1B0EE7D30015AB87 /* os2.tiff in Resources */,
 				559AF9A31B0EE7D30015AB87 /* sun.tiff in Resources */,
+				552FF9A61B0FD6A90005A4F5 /* ahh0.wav in Resources */,
 				559AF97A1B0EE7D30015AB87 /* billA_4.tiff in Resources */,
 				559AF97D1B0EE7D30015AB87 /* billA_7.tiff in Resources */,
 				559AF98D1B0EE7D30015AB87 /* bucket.tiff in Resources */,
 				559AF9F31B0EE8290015AB87 /* story.txt in Resources */,
 				559AF99F1B0EE7D30015AB87 /* sgi.tiff in Resources */,
 				559AF99B1B0EE7D30015AB87 /* os2cpu.tiff in Resources */,
+				552FF9A71B0FD6A90005A4F5 /* ahh1.wav in Resources */,
 				559AF9861B0EE7D30015AB87 /* billL_1.tiff in Resources */,
 				559AF9A21B0EE7D30015AB87 /* spark_1.tiff in Resources */,
 				559AF9831B0EE7D30015AB87 /* billD_3.tiff in Resources */,
@@ -439,6 +466,7 @@
 				559AF9891B0EE7D30015AB87 /* billR_1.tiff in Resources */,
 				559AF9981B0EE7D30015AB87 /* next.tiff in Resources */,
 				559AF9941B0EE7D30015AB87 /* linux.tiff in Resources */,
+				552FF9A91B0FD6A90005A4F5 /* ahh3.wav in Resources */,
 				559AF9901B0EE7D30015AB87 /* hurd.tiff in Resources */,
 				559AF9971B0EE7D30015AB87 /* maccpu.tiff in Resources */,
 				559AF9801B0EE7D30015AB87 /* billD_0.tiff in Resources */,
@@ -449,9 +477,11 @@
 				559AF98E1B0EE7D30015AB87 /* hand_down.tiff in Resources */,
 				559AF98A1B0EE7D30015AB87 /* billR_2.tiff in Resources */,
 				554572781B0FBE5900E06671 /* rules.rtf in Resources */,
+				552FF9AE1B0FD8040005A4F5 /* MacBill.icns in Resources */,
 				559AF9771B0EE7D30015AB87 /* billA_12.tiff in Resources */,
 				559AF97E1B0EE7D30015AB87 /* billA_8.tiff in Resources */,
 				559AF9EE1B0EE8290015AB87 /* Localizable.strings in Resources */,
+				552FF9AA1B0FD6A90005A4F5 /* mssound.wav in Resources */,
 				559AF9A61B0EE7D30015AB87 /* wingdows.tiff in Resources */,
 				559AF99D1B0EE7D30015AB87 /* palmcpu.tiff in Resources */,
 				559AF98C1B0EE7D30015AB87 /* bsdcpu.tiff in Resources */,
@@ -497,6 +527,7 @@
 			children = (
 				554572791B0FBE5900E06671 /* en */,
 				5545727B1B0FBE5F00E06671 /* bg */,
+				552FF9AB1B0FD6B70005A4F5 /* ja */,
 			);
 			name = rules.rtf;
 			path = Resources;
@@ -526,6 +557,7 @@
 			children = (
 				559AF9E11B0EE8290015AB87 /* bg */,
 				559AF9EB1B0EE8290015AB87 /* en */,
+				552FF9AC1B0FD73A0005A4F5 /* ja */,
 			);
 			name = story.txt;
 			sourceTree = "<group>";
@@ -641,7 +673,6 @@
 		559AF90A1B0EE4E70015AB87 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = "StepBillInfo-OSX.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -652,7 +683,6 @@
 		559AF90B1B0EE4E70015AB87 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = "StepBillInfo-OSX.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";

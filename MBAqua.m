@@ -265,7 +265,7 @@ static int screensize;
 {
     //NSString *strLocation = [[NSBundle mainBundle] pathForResource:@"story" ofType:@"rtf"];
     NSString *string = [NSString stringWithContentsOfFile:
-      [[NSBundle mainBundle] pathForResource: @"story" ofType: @"txt"]];
+      [[NSBundle mainBundle] pathForResource: @"story" ofType: @"txt"] encoding:NSUTF8StringEncoding error:NULL];
     NSLog(@"%@", [story_tv description]);
     [story_tv setString: string];
 	[NSApp runModalForWindow:story];

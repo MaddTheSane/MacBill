@@ -1,58 +1,95 @@
-{
-  fieldsize = 400;
-  interval = 200;
-  transparency = 30;
-  scores = (
-    {
-      level = 10;
-      name = gurkan;
-      score = 2000;
-    },
-   {
-    level = 9;
-    name = rob;
-    score = 1800;
-   },
-  {
-    level = 8;
-    name = banlu;
-    score = 1600;
-  },
-  {
-    level = 7;
-    name = ishioka;
-    score = 1400;
-  },
-  {
-    level = 6;
-    name = brian;
-    score = 1200;
-  },
- {
-   level = 5;
-   name = matias;
-   score = 1000;
- },
- {
-   level = 4;
-   name = sonia;
-   score = 800;
- },
- {
-   level = 3;
-   name = me;
-   score = 600;
- },
- {
-   level = 2;
-   name = me;
-   score = 400;
- },
- {
-   level = 1;
-   name = me;
-   score = 200;
-  }
-);
- 
-}
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist SYSTEM "file://localhost/System/Library/DTDs/PropertyList.dtd">
+<plist version="0.9">
+<dict>
+	<key>fieldsize</key>
+	<integer>400</integer>
+	<key>interval</key>
+	<integer>200</integer>
+	<key>scores</key>
+	<array>
+		<dict>
+			<key>level</key>
+			<integer>10</integer>
+			<key>name</key>
+			<string>brian</string>
+			<key>score</key>
+			<integer>2000</integer>
+		</dict>
+		<dict>
+			<key>level</key>
+			<integer>9</integer>
+			<key>name</key>
+			<string>matias</string>
+			<key>score</key>
+			<integer>1800</integer>
+		</dict>
+		<dict>
+			<key>level</key>
+			<integer>8</integer>
+			<key>name</key>
+			<string>me</string>
+			<key>score</key>
+			<integer>1600</integer>
+		</dict>
+		<dict>
+			<key>level</key>
+			<integer>7</integer>
+			<key>name</key>
+			<string>me</string>
+			<key>score</key>
+			<integer>1400</integer>
+		</dict>
+		<dict>
+			<key>level</key>
+			<integer>6</integer>
+			<key>name</key>
+			<string>me</string>
+			<key>score</key>
+			<integer>1200</integer>
+		</dict>
+		<dict>
+			<key>level</key>
+			<integer>5</integer>
+			<key>name</key>
+			<string>me</string>
+			<key>score</key>
+			<integer>1000</integer>
+		</dict>
+		<dict>
+			<key>level</key>
+			<integer>4</integer>
+			<key>name</key>
+			<string>me</string>
+			<key>score</key>
+			<integer>800</integer>
+		</dict>
+		<dict>
+			<key>level</key>
+			<integer>3</integer>
+			<key>name</key>
+			<string>me</string>
+			<key>score</key>
+			<integer>600</integer>
+		</dict>
+		<dict>
+			<key>level</key>
+			<integer>2</integer>
+			<key>name</key>
+			<string>me</string>
+			<key>score</key>
+			<integer>400</integer>
+		</dict>
+		<dict>
+			<key>level</key>
+			<integer>1</integer>
+			<key>name</key>
+			<string>me</string>
+			<key>score</key>
+			<integer>200</integer>
+		</dict>
+	</array>
+	<key>transparency</key>
+	<integer>30</integer>
+</dict>
+</plist>

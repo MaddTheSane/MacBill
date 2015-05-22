@@ -1,7 +1,6 @@
 /* MBCable */
 
-/* #import <Cocoa/Cocoa.h> */
-#import <AppKit/AppKit.h>
+#import <Cocoa/Cocoa.h>
 
 @interface MBCable : NSObject
 {
@@ -20,7 +19,7 @@
 + (MBCable *)Cable_setup;
 - (void)draw;
 - (void)update;
-- (int)Cable_onspark:(int)locx y:(int)locy;
+- (BOOL)sparkingAtX:(int)locx y:(int)locy;
 - (void)reset;
 
 @end

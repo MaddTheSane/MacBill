@@ -141,7 +141,7 @@ static MBUI *ui;
 	}
 }
 
-- (int)Cable_onspark:(int)locx y:(int)locy
+- (BOOL)sparkingAtX:(int)locx y:(int)locy
 {
 	if (!active)
 		return 0;

@@ -1,7 +1,6 @@
 /* MBBill */
 
-/* #import <Cocoa/Cocoa.h> */
-#import <AppKit/AppKit.h>
+#import <Cocoa/Cocoa.h>
 
 /* Bill's states */
 typedef NS_ENUM(int, BillState) {

@@ -1,7 +1,6 @@
 /* MBImageView */
 
-/* #import <Cocoa/Cocoa.h> */
-#import <AppKit/AppKit.h>
+#import <Cocoa/Cocoa.h>
 
 @class MBAqua;
 

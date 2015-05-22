@@ -1,7 +1,6 @@
 /* MBNetwork */
 
-/* #import <Cocoa/Cocoa.h> */
-#import <AppKit/AppKit.h>
+#import <Cocoa/Cocoa.h>
 
 /* Counters */
 typedef NS_ENUM(int, NETWORK_COUNTER) {

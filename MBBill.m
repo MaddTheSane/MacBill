@@ -379,19 +379,19 @@ update_dying(MBBill *bill) {
 {
 	int i;
 	for (i = 0; i < WCELS - 1; i++) {
-		[ui UI_load_picture_indexed:"billL" :i :1 :&lcels[i]];
-		[ui UI_load_picture_indexed:"billR" :i :1 :&rcels[i]];
+		[ui UI_load_picture_indexed:@"billL" :i :1 :&lcels[i]];
+		[ui UI_load_picture_indexed:@"billR" :i :1 :&rcels[i]];
 	}
 	lcels[WCELS - 1] = lcels[1];
 	rcels[WCELS - 1] = rcels[1];
 
 	for (i = 0; i < DCELS; i++)
-		[ui UI_load_picture_indexed:"billD" :i :1 :&dcels[i]];
+		[ui UI_load_picture_indexed:@"billD" :i :1 :&dcels[i]];
 	width = [ui UI_picture_width:dcels[0]];
 	height = [ui UI_picture_height:dcels[0]];
 
 	for (i = 0; i < ACELS; i++)
-		[ui UI_load_picture_indexed:"billA" :i :1 :&acels[i]];
+		[ui UI_load_picture_indexed:@"billA" :i :1 :&acels[i]];
 }
 
 + (int)width

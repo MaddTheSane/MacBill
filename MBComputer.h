@@ -1,7 +1,6 @@
 /* MBComputer */
 
-/* #import <Cocoa/Cocoa.h> */
-#import <AppKit/AppKit.h>
+#import <Cocoa/Cocoa.h>
 
 @interface MBComputer : NSObject
 {

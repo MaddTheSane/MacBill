@@ -83,7 +83,7 @@ static int screensize;
 	};
 }
 
-- (void)aqua_load_cursor:(const char *)name :(int)masked :(MBMCursor **)cursorp
+- (void)aqua_load_cursor:(NSString*)name :(MBCursorMap)masked :(MBMCursor **)cursorp
 {
 	MBMCursor *cursor = malloc(sizeof(MBMCursor));
 	MBPicture *pict;
@@ -98,11 +98,10 @@ static int screensize;
  * Pixmap handling
  */
 
-- (void)aqua_load_picture:(const char *)name :(int)trans :(MBPicture **)pictp
+- (void)aqua_load_picture:(NSString*)name :(int)trans :(MBPicture **)pictp
 {
 	MBPicture *pict = malloc(sizeof(MBPicture));
-	NSString *s = @(name);
-	pict->img = [NSImage imageNamed:s];
+	pict->img = [NSImage imageNamed:name];
 	*pictp = pict;
 }
 
@@ -339,6 +338,12 @@ static int screensize;
 		[defaults registerDefaults:dict];
 	}
 	
+	// if we don't have a value already
+	// set default for animation interval
+	if ([defaults integerForKey:@"interval"] == 0) {
+		[defaults setInteger:200 forKey:@"interval"];
+	}
+
 	[[view window] center];
 	// autosave frame info
 	[[view window] setFrameAutosaveName:@"main"];

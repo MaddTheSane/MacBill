@@ -105,7 +105,7 @@ determineOS(MBComputer *computer) {
 {
 	unsigned int i;
 	for (i = 0; i < NUM_SYS; i++)
-		[ui UI_load_picture:cpuname[i] :1 :&pictures[i]];
+		[ui UI_load_picture:@(cpuname[i]) :1 :&pictures[i]];
 	width = [ui UI_picture_width:pictures[0]];
 	height = [ui UI_picture_height:pictures[0]];
 }

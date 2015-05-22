@@ -83,16 +83,13 @@ static int interval = 200;
 	[aqua aqua_set_pausebutton:action];
 }
 
-- (void)UI_load_picture_indexed:(const char *)name :(int)index :(int)trans :(MBPicture **)pictp
+- (void)UI_load_picture_indexed:(NSString*)name :(int)index :(int)trans :(MBPicture **)pictp
 {
-	char *newname;
-	newname = malloc(strlen(name) + 4);
-	sprintf(newname, "%s_%d", name, index);
+	NSString *newname = [name stringByAppendingFormat:@"_%d", index];
 	[self UI_load_picture:newname :trans :pictp];
-	free(newname);
 }
 
-- (void)UI_load_picture:(const char *)name :(int)trans :(MBPicture **)pictp
+- (void)UI_load_picture:(NSString*)name :(int)trans :(MBPicture **)pictp
 {
 	[aqua aqua_load_picture:name :trans :pictp];
 }
@@ -107,7 +104,7 @@ static int interval = 200;
 	return [aqua aqua_picture_height:pict];
 }
 
-- (void)UI_load_cursor:(const char *)name :(int)masked :(MBMCursor **)cursorp
+- (void)UI_load_cursor:(NSString*)name :(MBCursorMap)masked :(MBMCursor **)cursorp
 {
 	[aqua aqua_load_cursor:name :masked :cursorp];
 }

@@ -1,10 +1,11 @@
 /* MBUI */
 
-/* #import <Cocoa/Cocoa.h> */
-#import <AppKit/AppKit.h>
+#import <Cocoa/Cocoa.h>
 
-#define CURSOR_SEP_MASK 0
-#define CURSOR_OWN_MASK 1
+typedef NS_ENUM(int, MBCursorMap) {
+	CURSOR_SEP_MASK = 0,
+	CURSOR_OWN_MASK
+};
 
 typedef NS_ENUM(NSInteger, DialogContants) {
 	DIALOG_NEWGAME = 0,
@@ -46,13 +47,13 @@ typedef NS_ENUM(NSInteger, DialogContants) {
 
 - (void)UI_set_pausebutton:(int)action;
 
-- (void)UI_load_picture:(const char *)name :(int)trans :(MBPicture **)pictp;
-- (void)UI_load_picture_indexed:(const char *)name :(int)index :(int)trans
+- (void)UI_load_picture:(NSString*)name :(int)trans :(MBPicture **)pictp;
+- (void)UI_load_picture_indexed:(NSString*)name :(int)index :(int)trans
 			     :(MBPicture **)pictp;
 - (int)UI_picture_width:(MBPicture *)pict;
 - (int)UI_picture_height:(MBPicture *)pict;
 
-- (void)UI_load_cursor:(const char *)name :(int)masked :(MBMCursor **)cursorp;
+- (void)UI_load_cursor:(NSString*)name :(MBCursorMap)masked :(MBMCursor **)cursorp;
 
 - (int)UI_intersect:(int)x1 :(int)y1 :(int)w1 :(int)h1 :(int)x2 :(int)y2 :(int)w2 :(int)h2;
 

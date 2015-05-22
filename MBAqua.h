@@ -1,7 +1,7 @@
 /* MBAqua */
 
-/* #import <Cocoa/Cocoa.h> */
-#import <AppKit/AppKit.h>
+#import <Cocoa/Cocoa.h>
+#import "MBUI.h"
 
 struct MBMCursor {
 	NSCursor *cursor;
@@ -40,8 +40,8 @@ struct MBPicture {
 }
 
 - (void)aqua_set_cursor:(MBMCursor *)cursor;
-- (void)aqua_load_cursor:(const char *)name :(int)masked :(MBMCursor **)cursorp;
-- (void)aqua_load_picture:(const char *)name :(int)trans :(MBPicture **)pictp;
+- (void)aqua_load_cursor:(NSString*)name :(MBCursorMap)masked :(MBMCursor **)cursorp;
+- (void)aqua_load_picture:(NSString*)name :(int)trans :(MBPicture **)pictp;
 - (int)aqua_picture_width:(MBPicture *)pict;
 - (int)aqua_picture_height:(MBPicture *)pict;
 - (void)aqua_clear_window;

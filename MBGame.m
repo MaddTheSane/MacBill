@@ -253,16 +253,16 @@ static int screensize = SCREENSIZE;
 
 	srandom(time(NULL) & 0x7fffffff);
 	[ui UI_make_main_window:screensize];
-	[ui UI_load_picture:"logo" :0 :&logo];
-	[ui UI_load_picture:"icon" :0 :&icon];
-	[ui UI_load_picture:"about" :0 :&about];
+	[ui UI_load_picture:@"logo" :0 :&logo];
+	[ui UI_load_picture:@"icon" :0 :&icon];
+	[ui UI_load_picture:@"about" :0 :&about];
 	[self draw_logo];
 	[ui UI_refresh];
 
 	[scorelist readScoreList];
 
-	[ui UI_load_cursor:"hand_up" :CURSOR_SEP_MASK :&defaultcursor];
-	[ui UI_load_cursor:"hand_down" :CURSOR_SEP_MASK :&downcursor];
+	[ui UI_load_cursor:@"hand_up" :CURSOR_SEP_MASK :&defaultcursor];
+	[ui UI_load_cursor:@"hand_down" :CURSOR_SEP_MASK :&downcursor];
 	[ui UI_set_cursor:defaultcursor];
 
 	[MBBill Bill_load_pix];

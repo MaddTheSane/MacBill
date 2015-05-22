@@ -17,8 +17,8 @@ static int grabbed;
 
 - (void)Bucket_load_pix
 {
-	[ui UI_load_picture:"bucket" :1 :&picture];
-	[ui UI_load_cursor:"bucket" :CURSOR_OWN_MASK :&cursor];
+	[ui UI_load_picture:@"bucket" :1 :&picture];
+	[ui UI_load_cursor:@"bucket" :CURSOR_OWN_MASK :&cursor];
 }
 
 - (BOOL)clickedAtX:(int)x y:(int)y
@@ -47,7 +47,7 @@ static int grabbed;
 	int i;
 	for (i = 0; i < [network countOfCables]; i++) {
 		MBCable *cable = [network cableAtIndex:i];
-		if ([cable Cable_onspark:x y:y])
+		if ([cable sparkingAtX:x y:y])
 			[cable reset];
 	}
 	grabbed = 0;

@@ -1,7 +1,6 @@
 /* MBBucket */
 
-/* #import <Cocoa/Cocoa.h> */
-#import <AppKit/AppKit.h>
+#import <Cocoa/Cocoa.h>
 
 @class MBUI;
 @class MBNetwork;

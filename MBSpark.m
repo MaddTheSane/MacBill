@@ -13,7 +13,7 @@ static MBPicture *pictures[2];
 {
 	int i;
 	for (i = 0; i < 2; i++)
-		[ui UI_load_picture_indexed:"spark" :i :1 :&pictures[i]];
+		[ui UI_load_picture_indexed:@"spark" :i :1 :&pictures[i]];
 }
 
 - (int)Spark_width

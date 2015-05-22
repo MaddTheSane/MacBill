@@ -15,7 +15,7 @@ struct MBPicture {
 @class MBGame;
 @class MBImageView;
 
-@interface MBAqua : NSObject <NSApplicationDelegate>
+@interface MBAqua : NSObject <NSApplicationDelegate, NSWindowDelegate>
 {
     IBOutlet MBGame *game;
     IBOutlet MBUI *ui;

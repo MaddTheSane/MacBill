@@ -13,6 +13,7 @@
 		552FF9A91B0FD6A90005A4F5 /* ahh3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 552FF9A41B0FD6A90005A4F5 /* ahh3.wav */; };
 		552FF9AA1B0FD6A90005A4F5 /* mssound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 552FF9A51B0FD6A90005A4F5 /* mssound.wav */; };
 		552FF9AE1B0FD8040005A4F5 /* MacBill.icns in Resources */ = {isa = PBXBuildFile; fileRef = 552FF9AD1B0FD8040005A4F5 /* MacBill.icns */; };
+		552FF9B01B0FE5FB0005A4F5 /* beos.png in Resources */ = {isa = PBXBuildFile; fileRef = 552FF9AF1B0FE5FB0005A4F5 /* beos.png */; };
 		554572781B0FBE5900E06671 /* rules.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 5545727A1B0FBE5900E06671 /* rules.rtf */; };
 		559AF8F51B0EE4E60015AB87 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 559AF8F41B0EE4E60015AB87 /* main.m */; };
 		559AF92C1B0EE7C40015AB87 /* MBAqua.m in Sources */ = {isa = PBXBuildFile; fileRef = 559AF9101B0EE7C40015AB87 /* MBAqua.m */; };
@@ -97,6 +98,8 @@
 		552FF9AB1B0FD6B70005A4F5 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = ja; path = ja.lproj/rules.rtf; sourceTree = "<group>"; };
 		552FF9AC1B0FD73A0005A4F5 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text; name = ja; path = ja.lproj/story.txt; sourceTree = "<group>"; };
 		552FF9AD1B0FD8040005A4F5 /* MacBill.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = MacBill.icns; sourceTree = "<group>"; };
+		552FF9AF1B0FE5FB0005A4F5 /* beos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = beos.png; sourceTree = "<group>"; };
+		552FF9BC1B0FEBFB0005A4F5 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/StepBill.strings; sourceTree = "<group>"; };
 		554572701B0FB56D00E06671 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/StepBill.xib; sourceTree = "<group>"; };
 		554572741B0FB79800E06671 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/StepBill.strings; sourceTree = "<group>"; };
 		554572751B0FBC9F00E06671 /* bg */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = bg; path = bg.lproj/StepBill.strings; sourceTree = "<group>"; };
@@ -315,6 +318,7 @@
 				559AF9521B0EE7D30015AB87 /* billR_0.tiff */,
 				559AF9531B0EE7D30015AB87 /* billR_1.tiff */,
 				559AF9541B0EE7D30015AB87 /* billR_2.tiff */,
+				552FF9AF1B0FE5FB0005A4F5 /* beos.png */,
 				559AF9551B0EE7D30015AB87 /* bsd.tiff */,
 				559AF9561B0EE7D30015AB87 /* bsdcpu.tiff */,
 				559AF9571B0EE7D30015AB87 /* bucket.tiff */,
@@ -471,6 +475,7 @@
 				559AF9971B0EE7D30015AB87 /* maccpu.tiff in Resources */,
 				559AF9801B0EE7D30015AB87 /* billD_0.tiff in Resources */,
 				559AF9931B0EE7D30015AB87 /* icon_orig.tiff in Resources */,
+				552FF9B01B0FE5FB0005A4F5 /* beos.png in Resources */,
 				559AF9841B0EE7D30015AB87 /* billD_4.tiff in Resources */,
 				559AF97F1B0EE7D30015AB87 /* billA_9.tiff in Resources */,
 				559AF9991B0EE7D30015AB87 /* nextcpu.tiff in Resources */,
@@ -577,6 +582,7 @@
 				554572701B0FB56D00E06671 /* Base */,
 				554572741B0FB79800E06671 /* en */,
 				554572751B0FBC9F00E06671 /* bg */,
+				552FF9BC1B0FEBFB0005A4F5 /* ja */,
 			);
 			name = StepBill.xib;
 			sourceTree = "<group>";

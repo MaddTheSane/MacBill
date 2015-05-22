@@ -51,7 +51,7 @@ get_border(int *x, int *y) {
 			*y = screensize + 1;
 			break;
 		case 3:
-			*x = - width - 2;
+			*x = -width - 2;
 			break;
 	}
 }
@@ -99,7 +99,7 @@ static void
 draw_std(MBBill *bill) {
 	if (bill->cargo >= 0)
 		[os OS_draw:bill->cargo :bill->x + bill->x_offset
-			:bill->y + bill->y_offset];
+			:bill->y + bill->y_offset + 35];
 	[ui UI_draw:bill->cels[bill->index] :bill->x :bill->y];
 }
 

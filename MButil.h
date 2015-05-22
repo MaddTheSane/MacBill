@@ -7,6 +7,8 @@
  *
  */
 
+#include <stdlib.h>
+
 #ifdef RAND
 #undef RAND
 #endif

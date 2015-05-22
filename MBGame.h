@@ -1,6 +1,7 @@
 /* MBGame */
 
-#import <Cocoa/Cocoa.h>
+/* #import <Cocoa/Cocoa.h> */
+#import <AppKit/AppKit.h>
 
 @interface MBGame : NSObject
 {

@@ -1,6 +1,7 @@
 /* MBOS */
 
-#import <Cocoa/Cocoa.h>
+/* #import <Cocoa/Cocoa.h> */
+#import <AppKit/AppKit.h>
 
 #define OS_WINGDOWS 0		/* OS 0 is wingdows */
 #define OS_OFF -1		/* OS -1 means the computer is off */

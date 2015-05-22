@@ -1,6 +1,7 @@
 /* MBBill */
 
-#import <Cocoa/Cocoa.h>
+/* #import <Cocoa/Cocoa.h> */
+#import <AppKit/AppKit.h>
 
 /* Bill's states */
 #define BILL_STATE_IN 1
@@ -10,7 +11,8 @@
 #define BILL_STATE_STRAY 5
 
 /* Offsets from upper right of computer */
-#define BILL_OFFSET_X 20
+/* #define BILL_OFFSET_X 20 */
+#define BILL_OFFSET_X 0
 #define BILL_OFFSET_Y 3
 
 @interface MBBill : NSObject

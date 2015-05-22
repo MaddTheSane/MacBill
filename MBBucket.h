@@ -1,6 +1,7 @@
 /* MBBucket */
 
-#import <Cocoa/Cocoa.h>
+/* #import <Cocoa/Cocoa.h> */
+#import <AppKit/AppKit.h>
 
 @interface MBBucket : NSObject
 {

@@ -8,6 +8,8 @@
 
 #define DIALOG_OK		(YES)
 #define DIALOG_CANCEL	(NO)
+#define OFFSET	(0)
+//r #define OFFSET (20)
 
 static NSTimer *timer = nil;
 static NSImage *frame;
@@ -67,9 +69,12 @@ static int screensize;
 - (void)aqua_set_cursor:(MBMCursor *)cursor
 {
 	[cursor->cursor set];
-	if ([[[cursor->cursor image] name] compare:@"hand"
+//r	if ([[[cursor->cursor image] name] compare:@"hand"
+//r     options:NSCaseInsensitiveSearch      
+//r     range:NSMakeRange(0, 4)] == NSOrderedSame) {
+	if ([[[cursor->cursor image] name] compare:@"han"
 			options:NSCaseInsensitiveSearch
-			range:NSMakeRange(0, 4)] == NSOrderedSame) {
+			range:NSMakeRange(0, 3)] == NSOrderedSame) {
 		[NSCursor unhide];
 		[view drawCursor:NO];
 	} else {
@@ -96,7 +101,7 @@ static int screensize;
 - (void)aqua_load_picture:(const char *)name :(int)trans :(MBPicture **)pictp
 {
 	MBPicture *pict = malloc(sizeof(MBPicture));
-	NSString *s = [NSString stringWithCString:name encoding:NSUTF8StringEncoding];
+	NSString *s = [NSString stringWithCString:name];
 	pict->img = [NSImage imageNamed:s];
 	*pictp = pict;
 }
@@ -127,7 +132,7 @@ static int screensize;
 
 - (void)aqua_draw_image:(MBPicture *)pict :(int)x :(int)y
 {
-	y += [self aqua_picture_height:pict];
+	//r y += [self aqua_picture_height:pict];
 	[frame lockFocus];
 	[pict->img dissolveToPoint:NSMakePoint(x, y) fraction:1.0];
 	[frame unlockFocus];
@@ -146,7 +151,7 @@ static int screensize;
 
 - (void)aqua_draw_string:(const char *)str :(int)x :(int)y
 {
-	NSString *status = [NSString stringWithCString:str encoding:NSUTF8StringEncoding];
+	NSString *status = [NSString stringWithCString:str];
 	NSDictionary *attrs = nil;
 	NSSize size = [status sizeWithAttributes:attrs];
 	[frame lockFocus];
@@ -183,7 +188,7 @@ static int screensize;
 	switch (dialog) {
 	case DIALOG_ENTERNAME:
 		[NSApp runModalForWindow:[entry window]];
-		[game Game_add_high_score:[[entry stringValue] UTF8String]];
+		[game Game_add_high_score:[[entry stringValue] cString]];
 		break;
 	case DIALOG_PAUSEGAME:
 		[self runAlertPanel:@"pause" :NO];
@@ -203,7 +208,7 @@ static int screensize;
 - (void)aqua_make_main_window:(int)size
 {
 	screensize = size;
-	[[view window] setContentSize:NSMakeSize(size, size)];
+	[[view window] setContentSize:NSMakeSize(size + OFFSET * 2, size + OFFSET * 2)];
 	// create frame buffer
 	frame = [[NSImage alloc] initWithSize:NSMakeSize(size, size)];
 	[frame setFlipped:YES];
@@ -222,6 +227,7 @@ static int screensize;
 	if (ret != NSAlertDefaultReturn) {
 		return;
 	}
+
 	[ui UI_kill_timer];
 	[game Game_start:1];
 }
@@ -257,11 +263,18 @@ static int screensize;
 
 - (IBAction)story:(id)sender
 {
+    NSString *string = [NSString stringWithContentsOfFile: 
+      [[NSBundle mainBundle] pathForResource: @"story" ofType: @"txt"]];
+    NSLog(@"%@", [story_tv description]);
+    [story_tv setString: string];
 	[NSApp runModalForWindow:story];
 }
 
 - (IBAction)rules:(id)sender
 {
+    NSString *string = [NSString stringWithContentsOfFile: 
+      [[NSBundle mainBundle] pathForResource: @"rules" ofType: @"txt"]];
+    [rules_tv setString: string];
 	[NSApp runModalForWindow:rules];
 }
 
@@ -320,18 +333,12 @@ static int screensize;
 {
 	// get userdefaults
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	NSString *s = [[NSBundle mainBundle] pathForResource:@"MacBill" ofType:@"plist"];
+	NSString *s = [[NSBundle mainBundle] pathForResource:@"Defaults" ofType:@"plist"];
 	NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:s];
 	if (dict != nil) {
 		[defaults registerDefaults:dict];
 	}
 	
-	// if we don't have a value already
-	// set default for animation interval
-	if ([defaults integerForKey:@"interval"] == 0) {
-		[defaults setInteger:200 forKey:@"interval"];
-	}
-
 	[[view window] center];
 	// autosave frame info
 	[[view window] setFrameAutosaveName:@"main"];
@@ -371,7 +378,7 @@ static int screensize;
 
 
 // enable/disable menu item
-- (BOOL)validateMenuItem:(NSMenuItem *)menuItem
+- (BOOL)validateMenuItem:(id <NSMenuItem>)menuItem
 {
 	if (menuItem == menu_pause) {
 		return menu_pause_enable_flag;

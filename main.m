@@ -1,4 +1,5 @@
-#import <Cocoa/Cocoa.h>
+/* #import <Cocoa/Cocoa.h> */
+#import <AppKit/AppKit.h>
 
 int main(int argc, const char *argv[])
 {

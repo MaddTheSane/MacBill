@@ -1,6 +1,7 @@
 /* MBAqua */
 
-#import <Cocoa/Cocoa.h>
+/* #import <Cocoa/Cocoa.h> */
+#import <AppKit/AppKit.h>
 
 struct MBMCursor {
 	NSCursor *cursor;
@@ -30,6 +31,8 @@ struct MBPicture {
     IBOutlet id slider_size;
     IBOutlet id slider_timer;
     IBOutlet id slider_trans;
+    IBOutlet id rules_tv;
+    IBOutlet id story_tv;
 }
 
 - (void)aqua_set_cursor:(MBMCursor *)cursor;
@@ -69,6 +72,6 @@ struct MBPicture {
 - (void)applicationDidFinishLaunching:(NSNotification *)notification;
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender;
 
-- (BOOL)validateMenuItem:(NSMenuItem *)menuItem;
+- (BOOL)validateMenuItem:(id <NSMenuItem>)menuItem;
 
 @end

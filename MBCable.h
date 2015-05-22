@@ -1,6 +1,7 @@
 /* MBCable */
 
-#import <Cocoa/Cocoa.h>
+/* #import <Cocoa/Cocoa.h> */
+#import <AppKit/AppKit.h>
 
 @interface MBCable : NSObject
 {

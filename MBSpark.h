@@ -1,6 +1,7 @@
 /* MBSpark */
 
-#import <Cocoa/Cocoa.h>
+/* #import <Cocoa/Cocoa.h> */
+#import <AppKit/AppKit.h>
 
 #define SPARK_SPEED 4
 #define SPARK_DELAY(level) (MAX(20 - (level), 0))

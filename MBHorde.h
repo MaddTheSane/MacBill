@@ -1,6 +1,7 @@
 /* MBHorde */
 
-#import <Cocoa/Cocoa.h>
+/* #import <Cocoa/Cocoa.h> */
+#import <AppKit/AppKit.h>
 
 /* Counters */
 #define HORDE_COUNTER_OFF 0

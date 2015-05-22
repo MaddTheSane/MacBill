@@ -1,6 +1,7 @@
 /* MBUI */
 
-#import <Cocoa/Cocoa.h>
+/* #import <Cocoa/Cocoa.h> */
+#import <AppKit/AppKit.h>
 
 #define CURSOR_SEP_MASK 0
 #define CURSOR_OWN_MASK 1

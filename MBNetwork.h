@@ -1,6 +1,7 @@
 /* MBNetwork */
 
-#import <Cocoa/Cocoa.h>
+/* #import <Cocoa/Cocoa.h> */
+#import <AppKit/AppKit.h>
 
 /* Counters */
 #define NETWORK_COUNTER_OFF 0

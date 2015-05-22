@@ -49,7 +49,7 @@ determineOS(MBComputer *computer) {
 
 + (MBComputer *)Computer_setup:(int)index
 {
-	MBComputer *computer = [[[self alloc] init] autorelease];
+	MBComputer *computer = [[self alloc] init];
 
 	int j, counter = 0, flag;
 	int randx, randy;
@@ -98,7 +98,7 @@ determineOS(MBComputer *computer) {
 	[ui UI_draw:pictures[type] :x :y];
 	if (os != OS_OFF)
 		[Os OS_draw:os
-			:x + OS_OFFSET :y + OS_OFFSET];
+			:x + OS_OFFSET :y + OS_OFFSET + 13];
 }
 
 + (void)Computer_load_pix

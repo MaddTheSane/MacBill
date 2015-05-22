@@ -1,7 +1,7 @@
 {
 	ApplicationName = "StepBill";
 	ApplicationDescription = "StepBill - XBill for GNUstep (based on MacBill)";
-	ApplicationRelease = "2.2 - 22/03/2004";
+	ApplicationRelease = "2.4 - 01/08/2005";
 	ApplicationURL = "http://www.linuks.mine.nu/stepbill/";
 	Authors = ("Rob Burns <rburns@softhome.net>,\nBanlu Kemiyatorn <id@project-ile.net>,\nG\u00fcrkan Seng\u00fcn <gurkan@linuks.mine.nu>");
 	Copyright = "Copyright (c) 2004 Rob Burns, G\u00fcrkan Seng\u00fcn, Banlu Kemiyatorn";

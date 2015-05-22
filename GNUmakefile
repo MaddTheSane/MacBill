@@ -35,7 +35,8 @@ rules.txt
 
 StepBill_LANGUAGES= \
 English \
-Japanese
+Japanese \
+Bulgarian
 
 #
 # Additional libraries

@@ -122,9 +122,6 @@
 /* Class = "NSMenuItem"; title = "Stop Speaking"; ObjectID = "Oyz-dy-DGm"; */
 "Oyz-dy-DGm.title" = "Stop Speaking";
 
-/* Class = "NSButtonCell"; title = "Отказ"; ObjectID = "Qlc-14-u4K"; */
-"Qlc-14-u4K.title" = "Отказ";
-
 /* Class = "NSWindow"; title = "Информация"; ObjectID = "QvC-M9-y7g"; */
 "QvC-M9-y7g.title" = "Информация";
 

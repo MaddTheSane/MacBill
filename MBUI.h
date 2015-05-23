@@ -58,6 +58,6 @@ typedef NS_ENUM(NSInteger, DialogConstants) {
 - (const char *)dialogString:(DialogConstants)index;
 - (const char *)menuString:(DialogConstants)index;
 
-- (void)UI_set_interval:(int)ti;
+- (void)setInterval:(int)ti;
 
 @end

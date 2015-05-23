@@ -118,7 +118,7 @@ static int screensize;
 	return [pict->img size].height;
 }
 
-- (void)aqua_clear_window
+- (void)clearWindow
 {
 	[frame lockFocus];
 	[[NSColor whiteColor] set];
@@ -126,15 +126,15 @@ static int screensize;
 	[frame unlockFocus];
 }
 
-- (void)aqua_refresh_window
+- (void)refreshWindow
 {
 	[view setSubimage:frame];
 	[view setNeedsDisplay:YES];
 }
 
-- (void)aqua_draw_image:(MBPicture *)pict :(int)x :(int)y
+- (void)drawImage:(MBPicture *)pict atX:(int)x y:(int)y
 {
-	//r y += [self aqua_picture_height:pict];
+	y += [self aqua_picture_height:pict];
 	[frame lockFocus];
 	[pict->img dissolveToPoint:NSMakePoint(x, y) fraction:1.0];
 	[frame unlockFocus];
@@ -164,13 +164,13 @@ static int screensize;
  * Timer operations
  */
 
-- (void)aqua_start_timer:(int)ms
+- (void)startTimerWithInterval:(int)ms
 {
 	timer = [NSTimer scheduledTimerWithTimeInterval:ms/1000.0 target:self
 					 selector:@selector(timer_tick) userInfo:nil repeats:YES];
 }
 
-- (void)aqua_stop_timer
+- (void)stopTimer
 {
 	if (!timer)
 		return;
@@ -178,7 +178,7 @@ static int screensize;
 	timer = nil;
 }
 
-- (int)aqua_timer_active
+- (BOOL)isTimerActive
 {
 	return (!!timer);
 }
@@ -355,9 +355,9 @@ static int screensize;
 	// set username to name entry
 	[entry setStringValue:NSUserName()];
 
-	[game Game_set_size:[[defaults objectForKey:@"fieldsize"] intValue]];
-	[ui UI_set_interval:[[defaults objectForKey:@"interval"] intValue]];
-	[view setTransparency:[[defaults objectForKey:@"transparency"] intValue]];
+	[game setSize:(int)[defaults integerForKey:@"fieldsize"]];
+	[ui setInterval:(int)[defaults integerForKey:@"interval"]];
+	[view setTransparency:(int)[defaults integerForKey:@"transparency"]];
 
     @autoreleasepool {
         NSMutableArray *tmpSounds = [NSMutableArray arrayWithCapacity:4];
@@ -402,7 +402,7 @@ static int screensize;
 
 
 // enable/disable menu item
-- (BOOL)validateMenuItem:(NSMenuItem*)menuItem
+- (BOOL)validateMenuItem:(NSMenuItem *)menuItem
 {
 	if (menuItem == menu_pause) {
 		return menu_pause_enable_flag;

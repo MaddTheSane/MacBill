@@ -291,7 +291,7 @@ update_dying(MBBill *bill) {
 }
 
 /* Adds a bill to the in state */
-+ Bill_enter
++ (instancetype)Bill_enter
 {
 	MBBill *bill;
 	MBComputer *computer;

@@ -34,6 +34,6 @@
 
 - (void)Game_main;
 
-- (void)Game_set_size:(int)size;
+- (void)setSize:(int)size;
 
 @end

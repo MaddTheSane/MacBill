@@ -44,14 +44,14 @@ struct MBPicture {
 - (void)aqua_load_picture:(NSString*)name :(int)trans :(MBPicture **)pictp;
 - (int)aqua_picture_width:(MBPicture *)pict;
 - (int)aqua_picture_height:(MBPicture *)pict;
-- (void)aqua_clear_window;
-- (void)aqua_refresh_window;
-- (void)aqua_draw_image:(MBPicture *)pict :(int)x :(int)y;
+- (void)clearWindow;
+- (void)refreshWindow;
+- (void)drawImage:(MBPicture *)pict atX:(int)x y:(int)y;
 - (void)drawLineFromX:(int)x1 y:(int)y1 toX:(int)x2 y:(int)y2;
 - (void)drawString:(NSString*)str atX:(int)x y:(int)y;
-- (void)aqua_start_timer:(int)ms;
-- (void)aqua_stop_timer;
-- (int)aqua_timer_active;
+- (void)startTimerWithInterval:(int)ms;
+- (void)stopTimer;
+@property (readonly, getter=isTimerActive) BOOL timerActive;
 
 - (void)aqua_popup_dialog:(DialogConstants)dialog;
 - (void)makeMainWindowSize:(int)size;

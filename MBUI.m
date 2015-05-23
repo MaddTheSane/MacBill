@@ -17,24 +17,24 @@ static int interval = 200;
 
 - (void)restartTimer
 {
-	[aqua aqua_start_timer:interval];
+	[aqua startTimerWithInterval:interval];
 }
 
 - (void)killTimer
 {
-	[aqua aqua_stop_timer];
+	[aqua stopTimer];
 }
 
 - (void)pauseGame
 {
-	if ([aqua aqua_timer_active])
+	if ([aqua isTimerActive])
 		playing = 1;
 	[self killTimer];
 }
 
 - (void)resumeGame
 {
-	if (playing && ![aqua aqua_timer_active])
+	if (playing && ![aqua isTimerActive])
 		[self restartTimer];
 	playing = 0;
 }
@@ -56,17 +56,17 @@ static int interval = 200;
 
 - (void)clear
 {
-	[aqua aqua_clear_window];
+	[aqua clearWindow];
 }
 
 - (void)refresh
 {
-	[aqua aqua_refresh_window];
+	[aqua refreshWindow];
 }
 
 - (void)drawPicture:(MBPicture *)pict atX:(int)x y:(int)y
 {
-	[aqua aqua_draw_image:pict :x :y];
+	[aqua drawImage:pict atX:x y:y];
 }
 
 - (void)drawLineFromX:(int)x1 y:(int)y1 toX:(int)x2 y:(int)y2
@@ -127,7 +127,7 @@ static int interval = 200;
 }
 
 
-- (void)UI_set_interval:(int)ti
+- (void)setInterval:(int)ti
 {
 	interval = ti;
 }

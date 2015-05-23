@@ -221,8 +221,8 @@
                 </menuItem>
             </items>
         </menu>
-        <window title="StepBill" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" deferred="NO" oneShot="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="QvC-M9-y7g" userLabel="StepBill">
-            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+        <window title="StepBill" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="QvC-M9-y7g" userLabel="StepBill">
+            <windowStyleMask key="styleMask" titled="YES" miniaturizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="335" y="390" width="400" height="400"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
@@ -237,6 +237,9 @@
                             <constraint firstAttribute="width" constant="400" id="jTd-Kz-1cv"/>
                         </constraints>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="LY2-Yz-ZMX"/>
+                        <connections>
+                            <outlet property="aqua" destination="Voe-Tx-rLC" id="xMW-LQ-xft"/>
+                        </connections>
                     </imageView>
                 </subviews>
                 <constraints>
@@ -246,6 +249,9 @@
                     <constraint firstItem="4eW-GN-CYo" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" id="uHm-2i-HQ9"/>
                 </constraints>
             </view>
+            <connections>
+                <outlet property="delegate" destination="Voe-Tx-rLC" id="R7x-w2-Lr4"/>
+            </connections>
         </window>
         <customObject id="mMq-Se-Uqk" customClass="MBHorde">
             <connections>
@@ -839,7 +845,7 @@ DQ
             </view>
             <point key="canvasLocation" x="764" y="1212"/>
         </window>
-        <window title="About XBill" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" animationBehavior="default" id="QWY-Cj-Wdr" customClass="NSPanel">
+        <window title="About XBill" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="QWY-Cj-Wdr" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES"/>
             <rect key="contentRect" x="2087" y="137" width="411" height="294"/>
             <rect key="screenRect" x="1920" y="30" width="1680" height="1027"/>

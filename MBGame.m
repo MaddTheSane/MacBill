@@ -283,7 +283,7 @@ static int screensize = SCREENSIZE;
 }
 
 
-- (void)Game_set_size:(int)size
+- (void)setSize:(int)size
 {
 	if (size >= SCREENSIZE) {
 		screensize = size;

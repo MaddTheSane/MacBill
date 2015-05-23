@@ -28,7 +28,7 @@ static MBMCursor *cursor[NUM_OS];		/* array of OS cursors (drag/drop) */
 
 - (void)OS_draw:(int)index atX:(int)x y:(int)y
 {
-	[ui UI_draw:os[index] :x :y];
+	[ui drawPicture:os[index] atX:x y:y];
 }
 
 - (int)width
@@ -43,15 +43,15 @@ static MBMCursor *cursor[NUM_OS];		/* array of OS cursors (drag/drop) */
 
 - (void)OS_set_cursor:(int)index
 {
-	[ui UI_set_cursor:cursor[index]];
+	[ui setCursor:cursor[index]];
 }
 
-- (int)OS_randpc
+- (int)randomPC
 {
 	return (RAND(MIN_PC, NUM_OS - 1));
 }
 
-- (BOOL)OS_ispc:(int)index
+- (BOOL)isPC:(int)index
 {
 	return (index >= MIN_PC);
 }

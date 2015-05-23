@@ -30,7 +30,7 @@ static int grabbed;
 - (void)draw
 {
 	if (!grabbed)
-		[ui UI_draw:picture :0 :0];
+		[ui drawPicture:picture atX:0 y:0];
 }
 
 - (void)grabAtX:(int)x y:(int)y
@@ -38,7 +38,7 @@ static int grabbed;
 	UNUSED(x);
 	UNUSED(y);
 
-	[ui UI_set_cursor:cursor];
+	[ui setCursor:cursor];
 	grabbed = 1;
 }
 

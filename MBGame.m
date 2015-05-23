@@ -37,6 +37,13 @@ static MBBill *grabbed;
 static int screensize = SCREENSIZE;
 
 @implementation MBGame
+@synthesize bucket;
+@synthesize horde;
+@synthesize network;
+@synthesize os;
+@synthesize scorelist;
+@synthesize spark;
+@synthesize ui;
 
 // private
 - (void)setup_level:(int)newlevel
@@ -44,7 +51,7 @@ static int screensize = SCREENSIZE;
 	level = newlevel;
 	[horde Horde_setup];
 	grabbed = NULL;
-	[ui UI_set_cursor:defaultcursor];
+	[ui setCursor:defaultcursor];
 	[network Network_setup];
 	iteration = 0;
 	efficiency = 0;
@@ -54,42 +61,42 @@ static int screensize = SCREENSIZE;
 - (void)update_info
 {
 	char str[80];
-	int on_screen = [horde Horde_get_counter:HORDE_COUNTER_ON];
-	int off_screen = [horde Horde_get_counter:HORDE_COUNTER_OFF];
+	int on_screen = [horde countOfCounterType:HORDE_COUNTER_ON];
+	int off_screen = [horde countOfCounterType:HORDE_COUNTER_OFF];
 	int base = [network countOfCounter:NETWORK_COUNTER_BASE];
 	int off = [network countOfCounter:NETWORK_COUNTER_OFF];
 	int win = [network countOfCounter:NETWORK_COUNTER_WIN];
 	int units = [network countOfComputers];
 	sprintf(str, "Bill:%d/%d  System:%d/%d/%d  Level:%d  Score:%d",
 		on_screen, off_screen, base, off, win, level, score);
-	[ui UI_draw_str:str :5 :screensize - 5];
+	[ui drawString:@(str) atX:5 y:screensize - 5];
 	efficiency += ((100 * base - 10 * win) / units);
 }
 
 // private
 - (void)draw_logo
 {
-	[ui UI_clear];
-	[ui UI_draw:logo
-		:(screensize - [ui UI_picture_width:logo]) / 2
-		:(screensize - [ui UI_picture_height:logo]) / 2];
+	[ui clear];
+	[ui drawPicture:logo
+		atX:(screensize - [ui UI_picture_width:logo]) / 2
+		y:(screensize - [ui UI_picture_height:logo]) / 2];
 }
 
-- (void)Game_start:(int)newlevel
+- (void)startAtLevel:(int)newlevel
 {
 	state = STATE_PLAYING;
 	score = 0;
-	[ui UI_restart_timer];
-	[ui UI_set_pausebutton:1];
+	[ui restartTimer];
+	[ui setPauseButton:1];
 	[self setup_level:newlevel];
 }
 
-- (void)Game_quit
+- (void)quitGame
 {
 	[scorelist writeScoreList];
 }
 
-- (void)Game_warp_to_level:(int)lev
+- (void)warpToLevel:(int)lev
 {
 	if (state == STATE_PLAYING) {
 		if (lev <= level)
@@ -99,42 +106,42 @@ static int screensize = SCREENSIZE;
 	else {
 		if (lev <= 0)
 			return;
-		[self Game_start:lev];
+		[self startAtLevel:lev];
 	}
 }
 
-- (void)Game_add_high_score:(NSString *)str
+- (void)addHighScore:(NSString *)str
 {
 	[scorelist addScoreWithName:str level:level score:score];
 }
 
-- (void)Game_button_press:(int)x y:(int)y
+- (void)pressButtonAtX:(int)x y:(int)y
 {
 	int counter;
 
 	if (state != STATE_PLAYING)
 		return;
-	[ui UI_set_cursor:downcursor];
+	[ui setCursor:downcursor];
 
 	if ([bucket clickedAtX:x y:y]) {
 		[bucket grabAtX:x y:y];
 		return;
 	}
 
-	grabbed = [horde Horde_clicked_stray:x y:y];
+	grabbed = [horde strayClickedAtX:x y:y];
 	if (grabbed != NULL) {
 		[os OS_set_cursor:grabbed->cargo];
 		return;
 	}
 
-	counter = [horde Horde_process_click:x y:y];
+	counter = [horde processClickAtX:x y:y];
 	score += (counter * counter * SCORE_BILLPOINTS);
 }
 
-- (void)Game_button_release:(int)x y:(int)y
+- (void)releaseButtonAtX:(int)x y:(int)y
 {
 	int i;
-	[ui UI_set_cursor:defaultcursor];
+	[ui setCursor:defaultcursor];
 
 	if (state != STATE_PLAYING)
 		return;
@@ -147,8 +154,8 @@ static int screensize = SCREENSIZE;
 	for (i = 0; i < [network countOfComputers]; i++) {
 		MBComputer *computer = [network computerAtIndex:i];
 
-		if ([computer Computer_on:x :y] &&
-		    [computer Computer_compatible:grabbed->cargo] &&
+		if ([computer isComputerAtX:x y:y] &&
+		    [computer isCompatibleWithSystem:grabbed->cargo] &&
 		    (computer->os == OS_WINGDOWS || computer->os == OS_OFF)) {
 			int counter;
 
@@ -159,30 +166,30 @@ static int screensize = SCREENSIZE;
 				counter = NETWORK_COUNTER_OFF;
 			[network incrementCounter:counter byValue:-1];
 			computer->os = grabbed->cargo;
-			[horde Horde_remove_bill:grabbed];
+			[horde removeBill:grabbed];
 			grabbed = NULL;
 			return;
 		}
 	}
-	[horde Horde_add_bill:grabbed];
+	[horde addBill:grabbed];
 	grabbed = NULL;
 }
 
-- (void)Game_update
+- (void)update
 {
 	char str[40];
 	
 	switch (state) {
 		case STATE_PLAYING:
-			[ui UI_clear];
+			[ui clear];
 			[bucket draw];
-			[network Network_update];
-			[network Network_draw];
-			[horde Horde_update:iteration];
-			[horde Horde_draw];
+			[network update];
+			[network draw];
+			[horde update:iteration];
+			[horde draw];
 			[self update_info];
-			if ([horde Horde_get_counter:HORDE_COUNTER_ON] +
-				[horde Horde_get_counter:HORDE_COUNTER_OFF] == 0) {
+			if ([horde countOfCounterType:HORDE_COUNTER_ON] +
+				[horde countOfCounterType:HORDE_COUNTER_OFF] == 0) {
 				score += (level * efficiency / iteration);
 				state = STATE_BETWEEN;
 			}
@@ -191,23 +198,23 @@ static int screensize = SCREENSIZE;
 				state = STATE_END;
 			break;
 		case STATE_END:
-			[ui UI_set_cursor:defaultcursor];
-			[ui UI_clear];
+			[ui setCursor:defaultcursor];
+			[ui clear];
 			[network Network_toasters];
-			[network Network_draw];
-			[ui UI_refresh];
+			[network draw];
+			[ui refresh];
 			[ui UI_popup_dialog:DIALOG_ENDGAME];
 			if ([scorelist isHighScore:score]) {
 				[ui UI_popup_dialog:DIALOG_ENTERNAME];
 			}
 			[ui UI_popup_dialog:DIALOG_HIGHSCORE];
 			[self draw_logo];
-			[ui UI_kill_timer];
-			[ui UI_set_pausebutton:0];
+			[ui killTimer];
+			[ui setPauseButton:0];
 			state = STATE_WAITING;
 			break;
 		case STATE_BETWEEN:
-			[ui UI_set_cursor:defaultcursor];
+			[ui setCursor:defaultcursor];
 			sprintf(str, "After Level %d:\nScore: %d", level, score);
 			[ui UI_popup_dialog:DIALOG_SCORE];
 			state = STATE_PLAYING;
@@ -217,7 +224,7 @@ static int screensize = SCREENSIZE;
 		case STATE_WAITING:
 			break;
 	}
-	[ui UI_refresh];
+	[ui refresh];
 	iteration++;
 }
 
@@ -252,18 +259,18 @@ static int screensize = SCREENSIZE;
 	[MBComputer Computer_class_init:self :network :os :ui];
 
 	srandom(time(NULL) & 0x7fffffff);
-	[ui UI_make_main_window:screensize];
+	[ui makeMainWindowSize:screensize];
 	[ui UI_load_picture:@"logo" :0 :&logo];
 	[ui UI_load_picture:@"icon" :0 :&icon];
 	[ui UI_load_picture:@"about" :0 :&about];
 	[self draw_logo];
-	[ui UI_refresh];
+	[ui refresh];
 
 	[scorelist readScoreList];
 
 	[ui UI_load_cursor:@"hand_up" :CURSOR_SEP_MASK :&defaultcursor];
 	[ui UI_load_cursor:@"hand_down" :CURSOR_SEP_MASK :&downcursor];
-	[ui UI_set_cursor:defaultcursor];
+	[ui setCursor:defaultcursor];
 
 	[MBBill Bill_load_pix];
 	[os OS_load_pix];
@@ -272,7 +279,7 @@ static int screensize = SCREENSIZE;
 	[spark Spark_load_pix];
 
 	state = STATE_WAITING;
-	[ui UI_set_pausebutton:0];
+	[ui setPauseButton:0];
 }
 
 

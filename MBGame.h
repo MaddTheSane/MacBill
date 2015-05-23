@@ -11,23 +11,21 @@
 @class MBBucket;
 
 @interface MBGame : NSObject
-{
-    IBOutlet MBBucket *bucket;
-    IBOutlet MBHorde *horde;
-    IBOutlet MBNetwork *network;
-    IBOutlet MBOS *os;
-    IBOutlet MBScorelist *scorelist;
-    IBOutlet MBSpark *spark;
-    IBOutlet MBUI *ui;
-}
+@property (assign) IBOutlet MBBucket *bucket;
+@property (assign) IBOutlet MBHorde *horde;
+@property (assign) IBOutlet MBNetwork *network;
+@property (assign) IBOutlet MBOS *os;
+@property (assign) IBOutlet MBScorelist *scorelist;
+@property (assign) IBOutlet MBSpark *spark;
+@property (assign) IBOutlet MBUI *ui;
 
-- (void)Game_start:(int)newlevel;
-- (void)Game_quit;
-- (void)Game_warp_to_level:(int)lev;
-- (void)Game_add_high_score:(NSString *)str;
-- (void)Game_button_press:(int)x y:(int)y;
-- (void)Game_button_release:(int)x y:(int)y;
-- (void)Game_update;
+- (void)startAtLevel:(int)newlevel;
+- (void)quitGame;
+- (void)warpToLevel:(int)lev;
+- (void)addHighScore:(NSString *)str;
+- (void)pressButtonAtX:(int)x y:(int)y;
+- (void)releaseButtonAtX:(int)x y:(int)y;
+- (void)update;
 
 @property (readonly) int score;
 @property (readonly) int level;

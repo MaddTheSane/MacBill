@@ -21,8 +21,8 @@ typedef NS_ENUM(int, NETWORK_COUNTER) {
 }
 
 - (void)Network_setup;
-- (void)Network_draw;
-- (void)Network_update;
+- (void)draw;
+- (void)update;
 - (void)Network_toasters;
 - (MBComputer *)computerAtIndex:(int)index;
 @property (readonly) int countOfComputers;

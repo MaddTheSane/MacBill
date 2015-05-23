@@ -17,29 +17,32 @@ static BOOL menu_pause_enable_flag = NO;
 static int screensize;
 
 @implementation MBAqua
+{
+    NSArray *deathBillSounds;
+}
 
 // private
 - (void)leave_window
 {
-	[ui UI_pause_game];
+	[ui pauseGame];
 }
 
 // private
 - (void)enter_window
 {
-	[ui UI_resume_game];
+	[ui resumeGame];
 }
 
 // private
 - (void)redraw_window
 {
-	[ui UI_refresh];
+	[ui refresh];
 }
 
 // private
 - (void)timer_tick
 {
-	[game Game_update];
+	[game update];
 }
 
 // private
@@ -137,7 +140,7 @@ static int screensize;
 	[frame unlockFocus];
 }
 
-- (void)aqua_draw_line:(int)x1 :(int)y1 :(int)x2 :(int)y2
+- (void)drawLineFromX:(int)x1 y:(int)y1 toX:(int)x2 y:(int)y2
 {
 	NSBezierPath *bz = [NSBezierPath bezierPath]; 
 	[frame lockFocus];
@@ -148,13 +151,12 @@ static int screensize;
 	[frame unlockFocus];
 }
 
-- (void)aqua_draw_string:(const char *)str :(int)x :(int)y
+- (void)drawString:(NSString*)str atX:(int)x y:(int)y
 {
-	NSString *status = @(str);
 	NSDictionary *attrs = nil;
-	NSSize size = [status sizeWithAttributes:attrs];
+	NSSize size = [str sizeWithAttributes:attrs];
 	[frame lockFocus];
-	[status drawAtPoint:NSMakePoint(x, y - size.height) withAttributes:attrs];
+	[str drawAtPoint:NSMakePoint(x, y - size.height) withAttributes:attrs];
 	[frame unlockFocus];
 }
 
@@ -182,12 +184,12 @@ static int screensize;
 }
 
 
-- (void)aqua_popup_dialog:(int)dialog
+- (void)aqua_popup_dialog:(DialogConstants)dialog
 {
 	switch (dialog) {
 	case DIALOG_ENTERNAME:
 		[NSApp runModalForWindow:[entry window]];
-		[game Game_add_high_score:[entry stringValue]];
+		[game addHighScore:[entry stringValue]];
 		break;
 	case DIALOG_PAUSEGAME:
 		[self runAlertPanel:@"pause" :NO];
@@ -201,10 +203,12 @@ static int screensize;
 	case DIALOG_HIGHSCORE:
 		[self high_score:self];
 		break;
+        default:
+            break;
 	}
 }
 
-- (void)aqua_make_main_window:(int)size
+- (void)makeMainWindowSize:(int)size
 {
 	screensize = size;
 	[[view window] setContentSize:NSMakeSize(size + OFFSET * 2, size + OFFSET * 2)];
@@ -213,7 +217,7 @@ static int screensize;
 	[frame setFlipped:YES];
 }
 
-- (void)aqua_set_pausebutton:(int)action
+- (void)setPauseButton:(BOOL)action
 {
 	menu_pause_enable_flag = (action ? YES : NO);
 }
@@ -227,8 +231,8 @@ static int screensize;
 		return;
 	}
 
-	[ui UI_kill_timer];
-	[game Game_start:1];
+	[ui killTimer];
+	[game startAtLevel:1];
 }
 
 - (IBAction)pause_game:(id)sender
@@ -238,7 +242,7 @@ static int screensize;
 
 - (IBAction)quit_game:(id)sender
 {
-	[game Game_quit];
+	[game quitGame];
 }
 
 - (IBAction)warp_level:(id)sender
@@ -250,8 +254,8 @@ static int screensize;
 		if (level == 0) {
 			level = 1;
 		}
-		[ui UI_kill_timer];
-		[game Game_start:level];
+		[ui killTimer];
+		[game startAtLevel:level];
 	}
 }
 
@@ -318,12 +322,12 @@ static int screensize;
 
 - (void)pressButtonAtX:(int)x y:(int)y
 {
-	[game Game_button_press:x y:y];
+	[game pressButtonAtX:x y:y];
 }
 
 - (void)releaseButtonAtX:(int)x y:(int)y
 {
-	[game Game_button_release:x y:y];
+	[game releaseButtonAtX:x y:y];
 }
 
 
@@ -355,7 +359,22 @@ static int screensize;
 	[ui UI_set_interval:[[defaults objectForKey:@"interval"] intValue]];
 	[view setTransparency:[[defaults objectForKey:@"transparency"] intValue]];
 
+    @autoreleasepool {
+        NSMutableArray *tmpSounds = [NSMutableArray arrayWithCapacity:4];
+        for (int i = 0; i < 4; i++) {
+            NSSound *sound = [NSSound soundNamed:[NSString stringWithFormat:@"ahh%d", i]];
+            [tmpSounds addObject:sound];
+        }
+        deathBillSounds = [tmpSounds copy];
+    }
+    
 	[game Game_main];
+}
+
+- (void)playRandomDeathSound
+{
+    NSSound *sound = deathBillSounds[arc4random_uniform((UInt32)deathBillSounds.count)];
+	[sound play];
 }
 
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender
@@ -365,7 +384,7 @@ static int screensize;
 	if (ret != NSAlertDefaultReturn) {
 		return NSTerminateCancel;
 	}
-	[game Game_quit];
+	[game quitGame];
 	return NSTerminateNow;
 }
 

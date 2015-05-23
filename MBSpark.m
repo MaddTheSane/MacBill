@@ -16,19 +16,19 @@ static MBPicture *pictures[2];
 		[ui UI_load_picture_indexed:@"spark" :i :1 :&pictures[i]];
 }
 
-- (int)Spark_width
+- (int)width
 {
 	return [ui UI_picture_width:pictures[0]];
 }
 
-- (int)Spark_height
+- (int)height
 {
 	return [ui UI_picture_height:pictures[0]];
 }
 
 - (void)drawAtX:(int)x y:(int)y index:(int)index
 {
-	[ui UI_draw:pictures[index] :x :y];
+	[ui drawPicture:pictures[index] atX:x y:y];
 }
 
 @end

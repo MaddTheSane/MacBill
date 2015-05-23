@@ -34,7 +34,7 @@ determineOS(MBComputer *computer) {
 	if (computer->type < MIN_PC)
 		return computer->type;
 	else
-		return [Os OS_randpc];
+		return [Os randomPC];
 }
 
 @implementation MBComputer
@@ -47,7 +47,7 @@ determineOS(MBComputer *computer) {
 	ui = u;
 }
 
-+ (MBComputer *)Computer_setup:(int)index
++ (MBComputer *)newComputerWithSetup:(int)index
 {
 	MBComputer *computer = [[self alloc] init];
 
@@ -79,7 +79,7 @@ determineOS(MBComputer *computer) {
 	return computer;
 }
 
-- (BOOL)Computer_on:(int)locx :(int)locy
+- (BOOL)isComputerAtX:(int)locx y:(int)locy
 {
 	return (locx + [Os width] / 2 >= x &&
 		locx - [Os width] / 2 < x + width &&
@@ -87,15 +87,15 @@ determineOS(MBComputer *computer) {
 		locy - [Os height] / 2 < y + height);
 }
 
-- (BOOL)Computer_compatible:(int)system
+- (BOOL)isCompatibleWithSystem:(int)system
 {
 	return (type == system ||
-		(type >= MIN_PC && [Os OS_ispc:system]));
+		(type >= MIN_PC && [Os isPC:system]));
 }
 
 - (void)draw
 {
-	[ui UI_draw:pictures[type] :x :y];
+	[ui drawPicture:pictures[type] atX:x y:y];
 	if (os != OS_OFF)
 		[Os OS_draw:os
 			atX:x + OS_OFFSET y:y + OS_OFFSET + 13];

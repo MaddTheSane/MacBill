@@ -18,7 +18,7 @@
 @property (readonly) int width;
 @property (readonly) int height;
 - (void)OS_set_cursor:(int)index;
-- (int)OS_randpc;
-- (BOOL)OS_ispc:(int)index;
+- (int)randomPC;
+- (BOOL)isPC:(int)index;
 
 @end

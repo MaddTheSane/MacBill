@@ -9,6 +9,7 @@
 #import "MBNetwork.h"
 #import "MBOS.h"
 #import "MBUI.h"
+#import "MBAqua.h"
 
 /* speed at which OS drops */
 #define GRAVITY 3
@@ -100,7 +101,7 @@ draw_std(MBBill *bill) {
 	if (bill->cargo >= 0)
 		[os OS_draw:bill->cargo atX:bill->x + bill->x_offset
 			y:bill->y + bill->y_offset + 35];
-	[ui UI_draw:bill->cels[bill->index] :bill->x :bill->y];
+	[ui drawPicture:bill->cels[bill->index] atX:bill->x y:bill->y];
 }
 
 static void
@@ -111,7 +112,7 @@ draw_at(MBBill *bill) {
 	if (bill->cargo >= 0)
 		[os OS_draw:bill->cargo atX:bill->x + bill->x_offset
 			y:bill->y + bill->y_offset];
-	[ui UI_draw:bill->cels[bill->index] :computer->x :computer->y];
+	[ui drawPicture:bill->cels[bill->index] atX:computer->x y:computer->y];
 }
 
 static void
@@ -156,7 +157,7 @@ update_at(MBBill *bill) {
 			bill->cargo = -1;
 		else {
 			bill->cargo = computer->stray->cargo;
-			[horde Horde_remove_bill:computer->stray];
+			[horde removeBill:computer->stray];
 			computer->stray = NULL;
 		}
 	} else
@@ -251,9 +252,9 @@ update_out(MBBill *bill) {
 		bill->y_offset += (8*(bill->index%2)-4); 
 	}
 	else {
-		[horde Horde_remove_bill:bill];
-		[horde Horde_inc_counter:HORDE_COUNTER_ON value:-1];
-		[horde Horde_inc_counter:HORDE_COUNTER_OFF value:1];
+		[horde removeBill:bill];
+		[horde incrementCounter:HORDE_COUNTER_ON byValue:-1];
+		[horde incrementCounter:HORDE_COUNTER_OFF byValue:1];
 	}
 }
 
@@ -268,12 +269,12 @@ update_dying(MBBill *bill) {
 	else {
 		bill->y += bill->y_offset;
 		if (bill->cargo < 0 || bill->cargo == OS_WINGDOWS)
-			[horde Horde_remove_bill:bill];
+			[horde removeBill:bill];
 		else {
-			[horde Horde_move_bill:bill];
+			[horde moveBill:bill];
 			bill->state = BILL_STATE_STRAY;
 		}
-		[horde Horde_inc_counter:HORDE_COUNTER_ON value:-1];
+		[horde incrementCounter:HORDE_COUNTER_ON byValue:-1];
 	}
 }
 
@@ -308,8 +309,8 @@ update_dying(MBBill *bill) {
 	computer = [network computerAtIndex:bill->target_c];
 	bill->target_x = computer->x + [computer width] - BILL_OFFSET_X;
 	bill->target_y = computer->y + BILL_OFFSET_Y;
-	[horde Horde_inc_counter:HORDE_COUNTER_ON value: 1];
-	[horde Horde_inc_counter:HORDE_COUNTER_OFF value: -1];
+	[horde incrementCounter:HORDE_COUNTER_ON byValue: 1];
+	[horde incrementCounter:HORDE_COUNTER_OFF byValue: -1];
 	bill->prev = NULL;
 	bill->next = NULL;
 	return bill;
@@ -361,6 +362,7 @@ update_dying(MBBill *bill) {
 	x_offset = -2;
 	y_offset = -15;
 	state = BILL_STATE_DYING;
+	[ui.aqua playRandomDeathSound];
 }
 
 - (BOOL)clickedAtX:(int)locx y:(int)locy

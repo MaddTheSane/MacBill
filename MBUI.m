@@ -13,74 +13,75 @@ static const char *menu_strings[DIALOG_MAX + 1];
 static int interval = 200;
 
 @implementation MBUI
+@synthesize aqua;
 
-- (void)UI_restart_timer
+- (void)restartTimer
 {
 	[aqua aqua_start_timer:interval];
 }
 
-- (void)UI_kill_timer
+- (void)killTimer
 {
 	[aqua aqua_stop_timer];
 }
 
-- (void)UI_pause_game
+- (void)pauseGame
 {
 	if ([aqua aqua_timer_active])
 		playing = 1;
-	[self UI_kill_timer];
+	[self killTimer];
 }
 
-- (void)UI_resume_game
+- (void)resumeGame
 {
 	if (playing && ![aqua aqua_timer_active])
-		[self UI_restart_timer];
+		[self restartTimer];
 	playing = 0;
 }
 
-- (void)UI_make_main_window:(int)size
+- (void)makeMainWindowSize:(int)size
 {
-	[aqua aqua_make_main_window:size];
+	[aqua makeMainWindowSize:size];
 }
 
-- (void)UI_popup_dialog:(int)dialog
+- (void)UI_popup_dialog:(DialogConstants)dialog
 {
 	[aqua aqua_popup_dialog:dialog];
 }
 
-- (void)UI_set_cursor:(MBMCursor *)cursor
+- (void)setCursor:(MBMCursor *)cursor
 {
 	[aqua aqua_set_cursor:cursor];
 }
 
-- (void)UI_clear
+- (void)clear
 {
 	[aqua aqua_clear_window];
 }
 
-- (void)UI_refresh
+- (void)refresh
 {
 	[aqua aqua_refresh_window];
 }
 
-- (void)UI_draw:(MBPicture *)pict :(int)x :(int)y
+- (void)drawPicture:(MBPicture *)pict atX:(int)x y:(int)y
 {
 	[aqua aqua_draw_image:pict :x :y];
 }
 
-- (void)UI_draw_line:(int)x1 :(int)y1 :(int)x2 :(int)y2
+- (void)drawLineFromX:(int)x1 y:(int)y1 toX:(int)x2 y:(int)y2
 {
-	[aqua aqua_draw_line:x1 :y1 :x2 :y2];
+	[aqua drawLineFromX:x1 y:y1 toX:x2 y:y2];
 }
 
-- (void)UI_draw_str:(const char *)str :(int)x :(int)y
+- (void)drawString:(NSString*)str atX:(int)x y:(int)y
 {
-	[aqua aqua_draw_string:str :x :y];
+	[aqua drawString:str atX:x y:y];
 }
 
-- (void)UI_set_pausebutton:(int)action
+- (void)setPauseButton:(BOOL)action
 {
-	[aqua aqua_set_pausebutton:action];
+	[aqua setPauseButton:action];
 }
 
 - (void)UI_load_picture_indexed:(NSString*)name :(int)index :(int)trans :(MBPicture **)pictp
@@ -109,18 +110,18 @@ static int interval = 200;
 	[aqua aqua_load_cursor:name :masked :cursorp];
 }
 
-- (int)UI_intersect:(int)x1 :(int)y1 :(int)w1 :(int)h1 :(int)x2 :(int)y2 :(int)w2 :(int)h2
+- (BOOL)UI_intersect:(int)x1 :(int)y1 :(int)w1 :(int)h1 :(int)x2 :(int)y2 :(int)w2 :(int)h2
 {
 	return ((abs(x2 - x1 + (w2 - w1) / 2) < (w1 + w2) / 2) &&
 		(abs(y2 - y1 + (h2 - h1) / 2) < (h1 + h2) / 2));
 }
 
-- (const char *)UI_dialog_string:(int)index
+- (const char *)dialogString:(DialogConstants)index
 {
 	return dialog_strings[index];
 }
 
-- (const char *)UI_menu_string:(int)index
+- (const char *)menuString:(DialogConstants)index
 {
 	return menu_strings[index];
 }

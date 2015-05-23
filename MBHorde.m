@@ -86,7 +86,7 @@ launch(int max) {
 	counters[HORDE_COUNTER_ON] = 0;
 }
 
-- (void)Horde_update:(int)iteration
+- (void)update:(int)iteration
 {
 	MBBill *bill, *next;
 	int level = [game level];
@@ -98,7 +98,7 @@ launch(int max) {
 	}
 }
 
-- (void)Horde_draw
+- (void)draw
 {
 	MBBill *bill;
 
@@ -108,13 +108,13 @@ launch(int max) {
 		[bill draw];
 }
 
-- (void)Horde_move_bill:(MBBill *)bill
+- (void)moveBill:(MBBill *)bill
 {
 	UNLINK(bill, alive);
 	PREPEND(bill, strays);
 }
 
-- (void)Horde_remove_bill:(MBBill *)bill
+- (void)removeBill:(MBBill *)bill
 {
 	if (bill->state == BILL_STATE_STRAY)
 		UNLINK(bill, strays);
@@ -124,7 +124,7 @@ launch(int max) {
 	[bill release];
 }
 
-- (void)Horde_add_bill:(MBBill *)bill
+- (void)addBill:(MBBill *)bill
 {
 	if (bill->state == BILL_STATE_STRAY)
 		PREPEND(bill, strays);
@@ -132,7 +132,7 @@ launch(int max) {
 		PREPEND(bill, alive);
 }
 
-- (MBBill *)Horde_clicked_stray:(int)x y:(int)y
+- (MBBill *)strayClickedAtX:(int)x y:(int)y
 {
 	MBBill *bill;
 
@@ -145,7 +145,7 @@ launch(int max) {
 	return NULL;
 }
 
-- (int)Horde_process_click:(int)x y:(int)y
+- (int)processClickAtX:(int)x y:(int)y
 {
 	MBBill *bill;
 	int counter = 0;
@@ -166,12 +166,12 @@ launch(int max) {
 	return counter;
 }
 
-- (void)Horde_inc_counter:(int)counter value:(int)val
+- (void)incrementCounter:(HordeCounter)counter byValue:(int)val
 {
 	counters[counter] += val;
 }
 
-- (int)Horde_get_counter:(int)counter
+- (int)countOfCounterType:(HordeCounter)counter
 {
 	return counters[counter];
 }

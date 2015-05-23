@@ -3,9 +3,11 @@
 #import <Cocoa/Cocoa.h>
 
 /* Counters */
-#define HORDE_COUNTER_OFF 0
-#define HORDE_COUNTER_ON 1
+typedef NS_ENUM(int, HordeCounter) {
+	HORDE_COUNTER_OFF = 0,
+	HORDE_COUNTER_ON
 #define HORDE_COUNTER_MAX 1
+};
 
 @class MBGame;
 @class MBNetwork;
@@ -18,14 +20,14 @@
 }
 
 - (void)Horde_setup;
-- (void)Horde_update:(int)iteration;
-- (void)Horde_draw;
-- (void)Horde_move_bill:(MBBill *)bill;
-- (void)Horde_remove_bill:(MBBill *)bill;
-- (void)Horde_add_bill:(MBBill *)bill;
-- (MBBill *)Horde_clicked_stray:(int)x y:(int)y;
-- (int)Horde_process_click:(int)x y:(int)y;
-- (void)Horde_inc_counter:(int)counter value:(int)val;
-- (int)Horde_get_counter:(int)counter;
+- (void)update:(int)iteration;
+- (void)draw;
+- (void)moveBill:(MBBill *)bill;
+- (void)removeBill:(MBBill *)bill;
+- (void)addBill:(MBBill *)bill;
+- (MBBill *)strayClickedAtX:(int)x y:(int)y;
+- (int)processClickAtX:(int)x y:(int)y;
+- (void)incrementCounter:(HordeCounter)counter byValue:(int)val;
+- (int)countOfCounterType:(HordeCounter)counter;
 
 @end

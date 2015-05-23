@@ -13,8 +13,8 @@
 }
 
 - (void)Spark_load_pix;
-- (int)Spark_width;
-- (int)Spark_height;
+@property (readonly) int width;
+@property (readonly) int height;
 - (void)drawAtX:(int)x y:(int)y index:(int)index;
 
 @end

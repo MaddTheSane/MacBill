@@ -67,10 +67,10 @@ static MBUI *ui;
 
 - (void)draw
 {
-	[ui UI_draw_line:x1 :y1 :x2 :y2];
+	[ui drawLineFromX:x1 y:y1 toX:x2 y:y2];
 	if (active) {
-		int rx = x - [spark Spark_width]/2;
-		int ry = y - [spark Spark_height]/2;
+		int rx = x - spark.width/2;
+		int ry = y - spark.height/2;
 		[spark drawAtX:rx y:ry index:index];
 	}
 }
@@ -145,8 +145,8 @@ static MBUI *ui;
 {
 	if (!active)
 		return 0;
-	return (abs(locx - x) < [spark Spark_width] &&
-		abs(locy - y) < [spark Spark_height]);
+	return (abs(locx - x) < [spark width] &&
+		abs(locy - y) < [spark height]);
 }
 
 - (void)reset

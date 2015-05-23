@@ -7,7 +7,7 @@ typedef NS_ENUM(int, MBCursorMap) {
 	CURSOR_OWN_MASK
 };
 
-typedef NS_ENUM(NSInteger, DialogContants) {
+typedef NS_ENUM(NSInteger, DialogConstants) {
 	DIALOG_NEWGAME = 0,
 	DIALOG_PAUSEGAME,
 	DIALOG_WARPLEVEL,
@@ -25,27 +25,25 @@ typedef NS_ENUM(NSInteger, DialogContants) {
 @class MBAqua;
 
 @interface MBUI : NSObject
-{
-    IBOutlet MBAqua *aqua;
-}
+@property (assign) IBOutlet MBAqua *aqua;
 
-- (void)UI_restart_timer;
-- (void)UI_kill_timer;
+- (void)restartTimer;
+- (void)killTimer;
 
-- (void)UI_pause_game;
-- (void)UI_resume_game;
+- (void)pauseGame;
+- (void)resumeGame;
 
-- (void)UI_make_main_window:(int)size;
+- (void)makeMainWindowSize:(int)size;
 
-- (void)UI_popup_dialog:(int)index;
-- (void)UI_set_cursor:(MBMCursor *)cursor;
-- (void)UI_clear;
-- (void)UI_refresh;
-- (void)UI_draw:(MBPicture *)picture :(int)x :(int)y;
-- (void)UI_draw_line:(int)x1 :(int)y1 :(int)x2 :(int)y2;
-- (void)UI_draw_str:(const char *)str :(int)x :(int)y;
+- (void)UI_popup_dialog:(DialogConstants)index;
+- (void)setCursor:(MBMCursor *)cursor;
+- (void)clear;
+- (void)refresh;
+- (void)drawPicture:(MBPicture *)picture atX:(int)x y:(int)y;
+- (void)drawLineFromX:(int)x1 y:(int)y1 toX:(int)x2 y:(int)y2;
+- (void)drawString:(NSString*)str atX:(int)x y:(int)y;
 
-- (void)UI_set_pausebutton:(int)action;
+- (void)setPauseButton:(BOOL)action;
 
 - (void)UI_load_picture:(NSString*)name :(int)trans :(MBPicture **)pictp;
 - (void)UI_load_picture_indexed:(NSString*)name :(int)index :(int)trans
@@ -55,10 +53,10 @@ typedef NS_ENUM(NSInteger, DialogContants) {
 
 - (void)UI_load_cursor:(NSString*)name :(MBCursorMap)masked :(MBMCursor **)cursorp;
 
-- (int)UI_intersect:(int)x1 :(int)y1 :(int)w1 :(int)h1 :(int)x2 :(int)y2 :(int)w2 :(int)h2;
+- (BOOL)UI_intersect:(int)x1 :(int)y1 :(int)w1 :(int)h1 :(int)x2 :(int)y2 :(int)w2 :(int)h2;
 
-- (const char *)UI_dialog_string:(int)index;
-- (const char *)UI_menu_string:(int)index;
+- (const char *)dialogString:(DialogConstants)index;
+- (const char *)menuString:(DialogConstants)index;
 
 - (void)UI_set_interval:(int)ti;
 

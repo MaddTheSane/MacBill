@@ -45,7 +45,7 @@ static int counters[NETWORK_COUNTER_MAX + 1]; 	/* number in each state */
 	}
 	computers = [[NSMutableArray alloc] init];
 	for (i = 0; i < ncomputers; i++) {
-		id comp = [MBComputer Computer_setup:i];
+		MBComputer *comp = [MBComputer newComputerWithSetup:i];
 		if (comp != nil) {
 			[computers addObject:comp];
 		} else {
@@ -63,7 +63,7 @@ static int counters[NETWORK_COUNTER_MAX + 1]; 	/* number in each state */
 }
 
 /* redraws the computers at their location with the proper image */
-- (void)Network_draw
+- (void)draw
 {
 	int i;
 	for (i = 0; i < ncables; i++)
@@ -72,7 +72,7 @@ static int counters[NETWORK_COUNTER_MAX + 1]; 	/* number in each state */
 		[(MBComputer*)[computers objectAtIndex:i] draw];
 }
 
-- (void)Network_update
+- (void)update
 {
 	int i;
 	for (i = 0; i < ncables; i++)

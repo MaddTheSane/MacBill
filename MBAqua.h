@@ -47,15 +47,15 @@ struct MBPicture {
 - (void)aqua_clear_window;
 - (void)aqua_refresh_window;
 - (void)aqua_draw_image:(MBPicture *)pict :(int)x :(int)y;
-- (void)aqua_draw_line:(int)x1 :(int)y1 :(int)x2 :(int)y2;
-- (void)aqua_draw_string:(const char *)str :(int)x :(int)y;
+- (void)drawLineFromX:(int)x1 y:(int)y1 toX:(int)x2 y:(int)y2;
+- (void)drawString:(NSString*)str atX:(int)x y:(int)y;
 - (void)aqua_start_timer:(int)ms;
 - (void)aqua_stop_timer;
 - (int)aqua_timer_active;
 
-- (void)aqua_popup_dialog:(int)dialog;
-- (void)aqua_make_main_window:(int)size;
-- (void)aqua_set_pausebutton:(int)action;
+- (void)aqua_popup_dialog:(DialogConstants)dialog;
+- (void)makeMainWindowSize:(int)size;
+- (void)setPauseButton:(BOOL)action;
 
 - (IBAction)new_game:(id)sender;
 - (IBAction)pause_game:(id)sender;
@@ -72,6 +72,8 @@ struct MBPicture {
 
 - (void)pressButtonAtX:(int)x y:(int)y;
 - (void)releaseButtonAtX:(int)x y:(int)y;
+
+- (void)playRandomDeathSound;
 
 - (BOOL)validateMenuItem:(NSMenuItem*)menuItem;
 

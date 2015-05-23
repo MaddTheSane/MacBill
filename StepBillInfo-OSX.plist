@@ -16,6 +16,8 @@
 		<string>Banlu Kemiyatorn &lt;id@project-ile.net&gt;</string>
 		<string>Gürkan Sengün &lt;gurkan@linuks.mine.nu&gt;</string>
 	</array>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
@@ -24,6 +26,8 @@
 	<string>nu.mine.linkus.$(PRODUCT_NAME:rfc1034identifier)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>${PRODUCT_NAME}</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>

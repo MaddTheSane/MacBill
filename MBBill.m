@@ -100,7 +100,7 @@ static void
 draw_std(MBBill *bill) {
 	if (bill->cargo >= 0)
 		[os OS_draw:bill->cargo atX:bill->x + bill->x_offset
-			y:bill->y + bill->y_offset + 35];
+			y:bill->y + bill->y_offset];
 	[ui drawPicture:bill->cels[bill->index] atX:bill->x y:bill->y];
 }
 
@@ -280,6 +280,8 @@ update_dying(MBBill *bill) {
 
 @implementation MBBill
 @synthesize state;
+@synthesize x;
+@synthesize y;
 
 + (void)Bill_class_init:g :h :n :o :u
 {
@@ -291,7 +293,7 @@ update_dying(MBBill *bill) {
 }
 
 /* Adds a bill to the in state */
-+ (instancetype)Bill_enter
++ (instancetype)newBill
 {
 	MBBill *bill;
 	MBComputer *computer;

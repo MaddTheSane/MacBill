@@ -55,7 +55,7 @@ launch(int max) {
 		return;
 	n = RAND(1, MIN(max, off_screen));
 	for (; n > 0; n--) {
-		bill = [MBBill Bill_enter];
+		bill = [MBBill newBill];
 		PREPEND(bill, alive);
 	}
 }

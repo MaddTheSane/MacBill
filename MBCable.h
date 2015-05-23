@@ -16,7 +16,7 @@
 
 + (void)Cable_class_init:g :n :s :u;
 
-+ (MBCable *)Cable_setup;
++ (MBCable *)newCable;
 - (void)draw;
 - (void)update;
 - (BOOL)sparkingAtX:(int)locx y:(int)locy;

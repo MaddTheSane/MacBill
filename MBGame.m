@@ -60,16 +60,16 @@ static int screensize = SCREENSIZE;
 // private
 - (void)update_info
 {
-	char str[80];
+	//char str[80];
 	int on_screen = [horde countOfCounterType:HORDE_COUNTER_ON];
 	int off_screen = [horde countOfCounterType:HORDE_COUNTER_OFF];
 	int base = [network countOfCounter:NETWORK_COUNTER_BASE];
 	int off = [network countOfCounter:NETWORK_COUNTER_OFF];
 	int win = [network countOfCounter:NETWORK_COUNTER_WIN];
 	int units = [network countOfComputers];
-	sprintf(str, "Bill:%d/%d  System:%d/%d/%d  Level:%d  Score:%d",
-		on_screen, off_screen, base, off, win, level, score);
-	[ui drawString:@(str) atX:5 y:screensize - 5];
+	NSString *str = [NSString stringWithFormat: @"Bill:%d/%d  System:%d/%d/%d  Level:%d  Score:%d",
+		on_screen, off_screen, base, off, win, level, score];
+	[ui drawString:str atX:5 y:screensize - 5];
 	efficiency += ((100 * base - 10 * win) / units);
 }
 
@@ -279,7 +279,7 @@ static int screensize = SCREENSIZE;
 	[spark Spark_load_pix];
 
 	state = STATE_WAITING;
-	[ui setPauseButton:0];
+	[ui setPauseButton:NO];
 }
 
 

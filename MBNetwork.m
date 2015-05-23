@@ -32,20 +32,18 @@ static int counters[NETWORK_COUNTER_MAX + 1]; 	/* number in each state */
 	ncomputers = [self on:[game level]];
 	if (computers != nil)
 		while ([computers count] != 0) {
-			[[computers objectAtIndex:0] release];
 			[computers removeObjectAtIndex:0];
 		}
 		[computers release];
 	if (cables != nil) {
 		while ([cables count] != 0) {
-			[[cables objectAtIndex:0] release];
 			[cables removeObjectAtIndex:0];
 		}
 		[cables release];
 	}
 	computers = [[NSMutableArray alloc] init];
 	for (i = 0; i < ncomputers; i++) {
-		MBComputer *comp = [MBComputer newComputerWithSetup:i];
+		MBComputer *comp = [[MBComputer newComputerWithSetup:i] autorelease];
 		if (comp != nil) {
 			[computers addObject:comp];
 		} else {
@@ -58,8 +56,11 @@ static int counters[NETWORK_COUNTER_MAX + 1]; 	/* number in each state */
 	counters[NETWORK_COUNTER_WIN] = 0;
 	ncables = MIN([game level], ncomputers/2);
 	cables = [[NSMutableArray alloc] init];
-	for (i = 0; i < ncables; i++)
-		[cables addObject:[MBCable Cable_setup]];
+	for (i = 0; i < ncables; i++) {
+		MBCable *tmpCable = [MBCable newCable];
+		[cables addObject:tmpCable];
+		[tmpCable release];
+	}
 }
 
 /* redraws the computers at their location with the proper image */

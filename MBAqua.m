@@ -8,8 +8,6 @@
 
 #define DIALOG_OK		(YES)
 #define DIALOG_CANCEL	(NO)
-#define OFFSET	(0)
-//r #define OFFSET (20)
 
 static NSTimer *timer = nil;
 static NSImage *frame;
@@ -72,12 +70,9 @@ static int screensize;
 - (void)aqua_set_cursor:(MBMCursor *)cursor
 {
 	[cursor->cursor set];
-//r	if ([[[cursor->cursor image] name] compare:@"hand"
-//r     options:NSCaseInsensitiveSearch      
-//r     range:NSMakeRange(0, 4)] == NSOrderedSame) {
-	if ([[[cursor->cursor image] name] compare:@"han"
+	if ([[[cursor->cursor image] name] compare:@"hand"
 			options:NSCaseInsensitiveSearch
-			range:NSMakeRange(0, 3)] == NSOrderedSame) {
+			range:NSMakeRange(0, 4)] == NSOrderedSame) {
 		[NSCursor unhide];
 		[view drawCursor:NO];
 	} else {
@@ -211,7 +206,7 @@ static int screensize;
 - (void)makeMainWindowSize:(int)size
 {
 	screensize = size;
-	[[view window] setContentSize:NSMakeSize(size + OFFSET * 2, size + OFFSET * 2)];
+	[[view window] setContentSize:NSMakeSize(size, size)];
 	// create frame buffer
 	frame = [[NSImage alloc] initWithSize:NSMakeSize(size, size)];
 	[frame setFlipped:YES];
@@ -295,7 +290,7 @@ static int screensize;
 	id sliders[] = { slider_size, slider_timer, slider_trans };
 
 	for (i = 0; i < 3; i++) {
-		tmp = [[defaults objectForKey:keys[i]] integerValue];
+		tmp = [defaults integerForKey:keys[i]];
 		[texts[i] setIntegerValue:tmp];
 		[sliders[i] setIntegerValue:tmp];
 	}

@@ -12,8 +12,7 @@ typedef NS_ENUM(int, BillState) {
 };
 
 /* Offsets from upper right of computer */
-/* #define BILL_OFFSET_X 20 */
-#define BILL_OFFSET_X 0
+#define BILL_OFFSET_X 20
 #define BILL_OFFSET_Y 3
 
 @interface MBBill : NSObject
@@ -35,9 +34,13 @@ typedef NS_ENUM(int, BillState) {
 
 @property (readonly) BillState state;
 @property (readonly) int height;
+
+@property (readonly) int x;
+@property (readonly) int y;
+
 + (void)Bill_class_init:g :h :n :o :u;
 
-+ (instancetype)Bill_enter;
++ (instancetype)newBill;
 - (void)draw;
 - (void)update;
 - (void)killBill;

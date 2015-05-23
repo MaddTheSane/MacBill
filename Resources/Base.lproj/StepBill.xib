@@ -34,7 +34,6 @@
                 <outlet property="warp" destination="6Pf-yy-5ie" id="vlC-gM-UVE"/>
             </connections>
         </customObject>
-        <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
         <menu title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
             <items>
                 <menuItem title="StepBill" id="1Xt-HY-uBw">
@@ -226,16 +225,13 @@
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="335" y="390" width="400" height="400"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+            <value key="minSize" type="size" width="213" height="107"/>
             <view key="contentView" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="0.0" width="400" height="400"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4eW-GN-CYo" customClass="MBImageView">
                         <rect key="frame" x="0.0" y="0.0" width="400" height="400"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="400" id="S8S-qo-HMQ"/>
-                            <constraint firstAttribute="width" constant="400" id="jTd-Kz-1cv"/>
-                        </constraints>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="LY2-Yz-ZMX"/>
                         <connections>
                             <outlet property="aqua" destination="Voe-Tx-rLC" id="xMW-LQ-xft"/>
@@ -252,6 +248,7 @@
             <connections>
                 <outlet property="delegate" destination="Voe-Tx-rLC" id="R7x-w2-Lr4"/>
             </connections>
+            <point key="canvasLocation" x="552" y="468"/>
         </window>
         <customObject id="mMq-Se-Uqk" customClass="MBHorde">
             <connections>
@@ -378,7 +375,7 @@ Gw
                     <constraint firstItem="ePa-Fg-HtV" firstAttribute="width" secondItem="VOJ-zI-bFI" secondAttribute="width" id="zmQ-MF-d8c"/>
                 </constraints>
             </view>
-            <point key="canvasLocation" x="335" y="652"/>
+            <point key="canvasLocation" x="521" y="721"/>
         </window>
         <window title="Enter Name" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IPq-Y3-Yg5" userLabel="Entry" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
@@ -447,7 +444,7 @@ DQ
                     <constraint firstItem="W4D-wM-AL2" firstAttribute="trailing" secondItem="06d-aX-bqC" secondAttribute="trailing" id="yXK-Vf-3py"/>
                 </constraints>
             </view>
-            <point key="canvasLocation" x="264" y="888.5"/>
+            <point key="canvasLocation" x="634" y="776.5"/>
         </window>
         <window title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="ekK-e9-bUB" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
@@ -618,10 +615,10 @@ Gw
                                     <rect key="frame" x="0.0" y="0.0" width="223" height="236"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <size key="minSize" width="409" height="231"/>
+                                    <size key="minSize" width="394" height="231"/>
                                     <size key="maxSize" width="463" height="10000000"/>
                                     <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <size key="minSize" width="409" height="231"/>
+                                    <size key="minSize" width="394" height="231"/>
                                     <size key="maxSize" width="463" height="10000000"/>
                                 </textView>
                             </subviews>
@@ -692,10 +689,10 @@ DQ
                                     <rect key="frame" x="0.0" y="0.0" width="223" height="236"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <size key="minSize" width="458" height="205"/>
+                                    <size key="minSize" width="443" height="205"/>
                                     <size key="maxSize" width="463" height="10000000"/>
                                     <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <size key="minSize" width="458" height="205"/>
+                                    <size key="minSize" width="443" height="205"/>
                                     <size key="maxSize" width="463" height="10000000"/>
                                 </textView>
                             </subviews>

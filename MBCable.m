@@ -37,7 +37,7 @@ static MBUI *ui;
 	ui = u;
 }
 
-+ (MBCable *)Cable_setup
++ (MBCable *)newCable
 {
 	MBCable *cable;
 	MBComputer *comp1, *comp2;

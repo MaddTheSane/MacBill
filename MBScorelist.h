@@ -4,7 +4,7 @@
 
 @class MBUI;
 
-@interface MBScorelist : NSObject <NSTableViewDataSource>
+@interface MBScorelist : NSObject <NSTableViewDataSource, NSTableViewDelegate>
 {
     IBOutlet MBUI *ui;
 }

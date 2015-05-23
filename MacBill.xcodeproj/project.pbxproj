@@ -187,7 +187,7 @@
 		F3A11AA912F5FDB7002F26FE /* toaster.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = toaster.tiff; sourceTree = "<group>"; };
 		F3A11AAA12F5FDB7002F26FE /* wingdows.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = wingdows.tiff; sourceTree = "<group>"; };
 		F3BECE6A12F5FFD9004309D4 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
-		F3BECE6C12F5FFFC004309D4 /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Japanese; path = Japanese.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F3BECE6C12F5FFFC004309D4 /* Japanese */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Japanese; path = Japanese.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

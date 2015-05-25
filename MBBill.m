@@ -63,7 +63,7 @@ step_size(unsigned int level) {
 }
 
 /*  Moves bill toward his target - returns whether or not he moved */
-static int
+static BOOL
 move(MBBill *bill, int mode) {
 	int xdist = bill->target_x - bill->x;
 	int ydist = bill->target_y - bill->y;
@@ -74,7 +74,7 @@ move(MBBill *bill, int mode) {
 	xdist = abs(xdist);
 	ydist = abs(ydist);
 	if (!xdist && !ydist)
-		return 0;
+		return NO;
 	else if (xdist < step && ydist < step) {
 		bill->x = bill->target_x;
 		bill->y = bill->target_y;
@@ -93,7 +93,7 @@ move(MBBill *bill, int mode) {
 		else if (dx > 0)
 			bill->cels = rcels;
 	}
-	return 1;
+	return YES;
 }
 
 static void

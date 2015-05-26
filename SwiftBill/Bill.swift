@@ -38,7 +38,7 @@ private let dyingCells = 5
 /** # of bill switching OS frames */
 private let switchingCells = 13
 
-class Bill {
+final class Bill {
 	// MARK: private data types shared between all objects
 	private static var didStaticInit: dispatch_once_t = 0
 	static func loadImages() {

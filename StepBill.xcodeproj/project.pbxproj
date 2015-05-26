@@ -84,6 +84,7 @@
 		5599F17E1B13E58300A138EB /* OS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5599F17D1B13E58300A138EB /* OS.swift */; };
 		5599F1801B13E78A00A138EB /* ScoreList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5599F17F1B13E78A00A138EB /* ScoreList.swift */; };
 		5599F1821B13E7C300A138EB /* ScoreObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5599F1811B13E7C300A138EB /* ScoreObject.swift */; };
+		5599F18E1B150ACC00A138EB /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5599F18D1B150ACC00A138EB /* Game.swift */; };
 		559AF8F51B0EE4E60015AB87 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 559AF8F41B0EE4E60015AB87 /* main.m */; };
 		559AF92C1B0EE7C40015AB87 /* MBAqua.m in Sources */ = {isa = PBXBuildFile; fileRef = 559AF9101B0EE7C40015AB87 /* MBAqua.m */; };
 		559AF92D1B0EE7C40015AB87 /* MBBill.m in Sources */ = {isa = PBXBuildFile; fileRef = 559AF9121B0EE7C40015AB87 /* MBBill.m */; };
@@ -196,6 +197,7 @@
 		5599F17D1B13E58300A138EB /* OS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OS.swift; sourceTree = "<group>"; };
 		5599F17F1B13E78A00A138EB /* ScoreList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreList.swift; sourceTree = "<group>"; };
 		5599F1811B13E7C300A138EB /* ScoreObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreObject.swift; sourceTree = "<group>"; };
+		5599F18D1B150ACC00A138EB /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		559AF8EC1B0EE4E60015AB87 /* StepBill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StepBill.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		559AF8F01B0EE4E60015AB87 /* StepBillInfo-OSX.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "StepBillInfo-OSX.plist"; sourceTree = "<group>"; };
 		559AF8F41B0EE4E60015AB87 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -340,6 +342,7 @@
 				5599F17D1B13E58300A138EB /* OS.swift */,
 				5599F1811B13E7C300A138EB /* ScoreObject.swift */,
 				5599F17F1B13E78A00A138EB /* ScoreList.swift */,
+				5599F18D1B150ACC00A138EB /* Game.swift */,
 				5599F1271B13DE1C00A138EB /* Images.xcassets */,
 				5599F1291B13DE1C00A138EB /* MainMenu.xib */,
 				5599F1231B13DE1C00A138EB /* Supporting Files */,
@@ -778,6 +781,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5599F17B1B13DF0700A138EB /* Bill.swift in Sources */,
+				5599F18E1B150ACC00A138EB /* Game.swift in Sources */,
 				5599F1261B13DE1C00A138EB /* AppDelegate.swift in Sources */,
 				5599F1821B13E7C300A138EB /* ScoreObject.swift in Sources */,
 				5599F1801B13E78A00A138EB /* ScoreList.swift in Sources */,

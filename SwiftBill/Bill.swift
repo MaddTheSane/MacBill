@@ -43,7 +43,26 @@ final class Bill {
 	private static var didStaticInit: dispatch_once_t = 0
 	static func loadImages() {
 		dispatch_once(&didStaticInit) {
-			
+			for i in 0..<(walkingCells - 1) {
+				if let lImage = loadPicture(named: "billL", index: i), rImage = loadPicture(named: "billR", index: i) {
+					self.walkLeftCells.append(lImage)
+					self.walkRightCells.append(rImage)
+				}
+				self.walkLeftCells.append(self.walkLeftCells[1])
+				self.walkRightCells.append(self.walkRightCells[1])
+				
+				for i in 0 ..< dyingCells {
+					if let dieBill = loadPicture(named: "billD", index: i) {
+						self.deathCells.append(dieBill)
+					}
+				}
+				
+				for i in 0 ..< switchingCells {
+					if let billS = loadPicture(named: "billA", index: i) {
+						self.switchCells.append(billS)
+					}
+				}
+			}
 		}
 	}
 	//static MBPicture *lcels[WCELS], *rcels[WCELS], *acels[ACELS], *dcels[DCELS];
@@ -54,8 +73,20 @@ final class Bill {
 
 	
 	private(set) var state = BillState.In
-	
+	private var index = 0
+	private var cels = walkLeftCells
+	private(set) var cargo = OSes.Wingdows
+	//private(set) weak var targetComputer: Computer!
+
 	init() {
+		
+	}
+	
+	func draw() {
+		
+	}
+	
+	func update() {
 		
 	}
 }

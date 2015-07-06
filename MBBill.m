@@ -383,19 +383,19 @@ update_dying(MBBill *bill) {
 {
 	int i;
 	for (i = 0; i < WCELS - 1; i++) {
-		[ui UI_load_picture_indexed:@"billL" :i :1 :&lcels[i]];
-		[ui UI_load_picture_indexed:@"billR" :i :1 :&rcels[i]];
+		[ui loadImageNamed:@"billL" atIndex:i hasTransparency:YES outPicture:&lcels[i]];
+		[ui loadImageNamed:@"billR" atIndex:i hasTransparency:YES outPicture:&rcels[i]];
 	}
 	lcels[WCELS - 1] = lcels[1];
 	rcels[WCELS - 1] = rcels[1];
 
 	for (i = 0; i < DCELS; i++)
-		[ui UI_load_picture_indexed:@"billD" :i :1 :&dcels[i]];
+		[ui loadImageNamed:@"billD" atIndex:i hasTransparency:YES outPicture:&dcels[i]];
 	width = [ui UI_picture_width:dcels[0]];
 	height = [ui UI_picture_height:dcels[0]];
 
 	for (i = 0; i < ACELS; i++)
-		[ui UI_load_picture_indexed:@"billA" :i :1 :&acels[i]];
+		[ui loadImageNamed:@"billA" atIndex:i hasTransparency:YES outPicture:&acels[i]];
 }
 
 + (int)width

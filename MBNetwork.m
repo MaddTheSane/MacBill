@@ -80,7 +80,7 @@ static int counters[NETWORK_COUNTER_MAX + 1]; 	/* number in each state */
 		[(MBCable*)[cables objectAtIndex:i] update];
 }
 
-- (void)Network_toasters
+- (void)networkToasters
 {
 	int i;
 	for (i = 0; i < ncomputers; i++) {

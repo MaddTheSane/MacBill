@@ -14,7 +14,7 @@
 
 + (void)Computer_class_init:g :n :o :u;
 
-+ (MBComputer *)newComputerWithSetup:(int)i;
++ (instancetype)newComputerWithSetup:(int)i;
 - (void)draw;
 - (BOOL)isComputerAtX:(int)locx y:(int)locy;
 - (BOOL)isCompatibleWithSystem:(int)system;

@@ -103,12 +103,12 @@ static int screensize;
 	*pictp = pict;
 }
 
-- (int)aqua_picture_width:(MBPicture *)pict
+- (int)aqua_picture_width:(in MBPicture *)pict
 {
 	return [pict->img size].width;
 }
 
-- (int)aqua_picture_height:(MBPicture *)pict
+- (int)aqua_picture_height:(in MBPicture *)pict
 {
 	return [pict->img size].height;
 }
@@ -182,20 +182,20 @@ static int screensize;
 - (void)aqua_popup_dialog:(DialogConstants)dialog
 {
 	switch (dialog) {
-	case DIALOG_ENTERNAME:
+	case DialogConstantsEnterName:
 		[NSApp runModalForWindow:[entry window]];
 		[game addHighScore:[entry stringValue]];
 		break;
-	case DIALOG_PAUSEGAME:
+	case DialogConstantsPauseGame:
 		[self runAlertPanel:@"pause" :NO];
 		break;
-	case DIALOG_ENDGAME:
+	case DialogConstantsEndGame:
 		[self runAlertPanel:@"endgame" :NO];
 		break;
-	case DIALOG_SCORE:
+	case DialogConstantsScore:
 		[self runAlertPanel:@"score" :NO];
 		break;
-	case DIALOG_HIGHSCORE:
+	case DialogConstantsHighScore:
 		[self high_score:self];
 		break;
         default:
@@ -232,7 +232,7 @@ static int screensize;
 
 - (IBAction)pause_game:(id)sender
 {
-	[ui UI_popup_dialog:DIALOG_PAUSEGAME];
+	[ui UI_popup_dialog:DialogConstantsPauseGame];
 }
 
 - (IBAction)quit_game:(id)sender

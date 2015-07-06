@@ -17,8 +17,8 @@ static int grabbed;
 
 - (void)Bucket_load_pix
 {
-	[ui UI_load_picture:@"bucket" :1 :&picture];
-	[ui UI_load_cursor:@"bucket" :CURSOR_OWN_MASK :&cursor];
+	[ui loadImageNamed:@"bucket" hasTransparency:YES outPicture:&picture];
+	[ui loadCursorNamed:@"bucket" mask:CURSOR_OWN_MASK outCursor:&cursor];
 }
 
 - (BOOL)clickedAtX:(int)x y:(int)y

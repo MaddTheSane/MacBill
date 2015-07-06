@@ -42,8 +42,8 @@ struct MBPicture {
 - (void)aqua_set_cursor:(MBMCursor *)cursor;
 - (void)aqua_load_cursor:(NSString*)name :(MBCursorMap)masked :(MBMCursor **)cursorp;
 - (void)aqua_load_picture:(NSString*)name :(int)trans :(MBPicture **)pictp;
-- (int)aqua_picture_width:(MBPicture *)pict;
-- (int)aqua_picture_height:(MBPicture *)pict;
+- (int)aqua_picture_width:(in MBPicture *)pict;
+- (int)aqua_picture_height:(in MBPicture *)pict;
 - (void)clearWindow;
 - (void)refreshWindow;
 - (void)drawImage:(MBPicture *)pict atX:(int)x y:(int)y;

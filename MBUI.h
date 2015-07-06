@@ -8,17 +8,17 @@ typedef NS_ENUM(int, MBCursorMap) {
 };
 
 typedef NS_ENUM(NSInteger, DialogConstants) {
-	DIALOG_NEWGAME = 0,
-	DIALOG_PAUSEGAME,
-	DIALOG_WARPLEVEL,
-	DIALOG_HIGHSCORE,
-	DIALOG_QUITGAME,
-	DIALOG_STORY,
-	DIALOG_RULES,
-	DIALOG_ABOUT,
-	DIALOG_SCORE,
-	DIALOG_ENDGAME,
-	DIALOG_ENTERNAME
+	DialogConstantsNewGame = 0,
+	DialogConstantsPauseGame,
+	DialogConstantsWarpToLevel,
+	DialogConstantsHighScore,
+	DialogConstantsQuitGame,
+	DialogConstantsStory,
+	DialogConstantsRules,
+	DialogConstantsAbout,
+	DialogConstantsScore,
+	DialogConstantsEndGame,
+	DialogConstantsEnterName
 #define DIALOG_MAX 10
 };
 
@@ -45,19 +45,19 @@ typedef NS_ENUM(NSInteger, DialogConstants) {
 
 - (void)setPauseButton:(BOOL)action;
 
-- (void)UI_load_picture:(NSString*)name :(int)trans :(MBPicture **)pictp;
-- (void)UI_load_picture_indexed:(NSString*)name :(int)index :(int)trans
-			     :(MBPicture **)pictp;
-- (int)UI_picture_width:(MBPicture *)pict;
-- (int)UI_picture_height:(MBPicture *)pict;
+- (void)loadImageNamed:(NSString*)name hasTransparency:(BOOL)trans outPicture:(inout MBPicture **)pictp;
+- (void)loadImageNamed:(NSString*)name atIndex:(int)index
+		   hasTransparency:(BOOL)trans outPicture:(inout MBPicture **)pictp;
+- (int)UI_picture_width:(in MBPicture *)pict;
+- (int)UI_picture_height:(in MBPicture *)pict;
 
-- (void)UI_load_cursor:(NSString*)name :(MBCursorMap)masked :(MBMCursor **)cursorp;
+- (void)loadCursorNamed:(NSString*)name mask:(MBCursorMap)masked outCursor:(inout MBMCursor **)cursorp;
 
 - (BOOL)UI_intersect:(int)x1 :(int)y1 :(int)w1 :(int)h1 :(int)x2 :(int)y2 :(int)w2 :(int)h2;
 
 - (const char *)dialogString:(DialogConstants)index;
 - (const char *)menuString:(DialogConstants)index;
 
-- (void)setInterval:(int)ti;
+@property int interval;
 
 @end

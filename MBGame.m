@@ -200,14 +200,14 @@ static int screensize = SCREENSIZE;
 		case STATE_END:
 			[ui setCursor:defaultcursor];
 			[ui clear];
-			[network Network_toasters];
+			[network networkToasters];
 			[network draw];
 			[ui refresh];
-			[ui UI_popup_dialog:DIALOG_ENDGAME];
+			[ui UI_popup_dialog:DialogConstantsEndGame];
 			if ([scorelist isHighScore:score]) {
-				[ui UI_popup_dialog:DIALOG_ENTERNAME];
+				[ui UI_popup_dialog:DialogConstantsEnterName];
 			}
-			[ui UI_popup_dialog:DIALOG_HIGHSCORE];
+			[ui UI_popup_dialog:DialogConstantsHighScore];
 			[self draw_logo];
 			[ui killTimer];
 			[ui setPauseButton:0];
@@ -216,7 +216,7 @@ static int screensize = SCREENSIZE;
 		case STATE_BETWEEN:
 			[ui setCursor:defaultcursor];
 			sprintf(str, "After Level %d:\nScore: %d", level, score);
-			[ui UI_popup_dialog:DIALOG_SCORE];
+			[ui UI_popup_dialog:DialogConstantsScore];
 			state = STATE_PLAYING;
 			[self setup_level:++level];
 			break;
@@ -260,16 +260,16 @@ static int screensize = SCREENSIZE;
 
 	srandom(time(NULL) & 0x7fffffff);
 	[ui makeMainWindowSize:screensize];
-	[ui UI_load_picture:@"logo" :0 :&logo];
-	[ui UI_load_picture:@"icon" :0 :&icon];
-	[ui UI_load_picture:@"about" :0 :&about];
+	[ui loadImageNamed:@"logo" hasTransparency:NO outPicture:&logo];
+	[ui loadImageNamed:@"icon" hasTransparency:NO outPicture:&icon];
+	[ui loadImageNamed:@"about" hasTransparency:NO outPicture:&about];
 	[self draw_logo];
 	[ui refresh];
 
 	[scorelist readScoreList];
 
-	[ui UI_load_cursor:@"hand_up" :CURSOR_SEP_MASK :&defaultcursor];
-	[ui UI_load_cursor:@"hand_down" :CURSOR_SEP_MASK :&downcursor];
+	[ui loadCursorNamed:@"hand_up" mask:CURSOR_SEP_MASK outCursor:&defaultcursor];
+	[ui loadCursorNamed:@"hand_down" mask:CURSOR_SEP_MASK outCursor:&downcursor];
 	[ui setCursor:defaultcursor];
 
 	[MBBill Bill_load_pix];

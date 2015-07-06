@@ -20,9 +20,9 @@ static MBMCursor *cursor[NUM_OS];		/* array of OS cursors (drag/drop) */
 {
 	unsigned int i;
 	for (i = 0; i < NUM_OS; i++) {
-		[ui UI_load_picture:@(osname[i]) :1 :&os[i]];
+		[ui loadImageNamed:@(osname[i]) hasTransparency:YES outPicture:&os[i]];
 		if (i != 0)
-			[ui UI_load_cursor:@(osname[i]) :CURSOR_OWN_MASK :&cursor[i]];
+			[ui loadCursorNamed:@(osname[i]) mask:CURSOR_OWN_MASK outCursor:&cursor[i]];
 	}
 }
 

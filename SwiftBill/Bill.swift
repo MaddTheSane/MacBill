@@ -8,15 +8,6 @@
 
 import Cocoa
 
-/** Bill's states */
-enum BillState {
-	case In
-	case At
-	case Out
-	case Dying
-	case Stray
-}
-
 /* Offsets from upper right of computer */
 let BillOffsetX = 20
 let BillOffsetY = 3
@@ -72,7 +63,7 @@ final class Bill {
 	private static var deathCells: [NSImage] = []
 
 	
-	private(set) var state = BillState.In
+	private(set) var state = State.In
 	private var index = 0
 	private var cels = walkLeftCells
 	private(set) var cargo = OSes.Wingdows
@@ -88,6 +79,20 @@ final class Bill {
 	
 	func update() {
 		
+	}
+	
+	/** Bill's states */
+	enum State {
+		case In
+		case At
+		case Out
+		case Dying
+		case Stray
+	}
+	
+	enum MovingSpeed {
+		case Slow
+		case Fast
 	}
 }
 /*

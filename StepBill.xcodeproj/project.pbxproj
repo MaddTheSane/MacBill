@@ -157,6 +157,8 @@
 		559AF9F31B0EE8290015AB87 /* story.txt in Resources */ = {isa = PBXBuildFile; fileRef = 559AF9E01B0EE8290015AB87 /* story.txt */; };
 		559AF9F41B0EE8290015AB87 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 559AF9E21B0EE8290015AB87 /* InfoPlist.strings */; };
 		559AF9F71B0EE8290015AB87 /* StepBill.xib in Resources */ = {isa = PBXBuildFile; fileRef = 559AF9E91B0EE8290015AB87 /* StepBill.xib */; };
+		55FCB25E1B4AFB4A0068E695 /* Spark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FCB25D1B4AFB4A0068E695 /* Spark.swift */; };
+		55FCB2601B4AFD7D0068E695 /* drawableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FCB25F1B4AFD7D0068E695 /* drawableProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -295,6 +297,8 @@
 		559AF9ED1B0EE8290015AB87 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		559AF9F91B0EE8800015AB87 /* en */ = {isa = PBXFileReference; lastKnownFileType = folder; name = en; path = en.lproj/StepBill.gorm; sourceTree = "<group>"; };
 		559AF9FB1B0EE8940015AB87 /* bg */ = {isa = PBXFileReference; lastKnownFileType = folder; name = bg; path = bg.lproj/StepBill.gorm; sourceTree = "<group>"; };
+		55FCB25D1B4AFB4A0068E695 /* Spark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spark.swift; sourceTree = "<group>"; };
+		55FCB25F1B4AFD7D0068E695 /* drawableProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = drawableProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -343,6 +347,8 @@
 				5599F1811B13E7C300A138EB /* ScoreObject.swift */,
 				5599F17F1B13E78A00A138EB /* ScoreList.swift */,
 				5599F18D1B150ACC00A138EB /* Game.swift */,
+				55FCB25D1B4AFB4A0068E695 /* Spark.swift */,
+				55FCB25F1B4AFD7D0068E695 /* drawableProtocol.swift */,
 				5599F1271B13DE1C00A138EB /* Images.xcassets */,
 				5599F1291B13DE1C00A138EB /* MainMenu.xib */,
 				5599F1231B13DE1C00A138EB /* Supporting Files */,
@@ -783,7 +789,9 @@
 				5599F17B1B13DF0700A138EB /* Bill.swift in Sources */,
 				5599F18E1B150ACC00A138EB /* Game.swift in Sources */,
 				5599F1261B13DE1C00A138EB /* AppDelegate.swift in Sources */,
+				55FCB25E1B4AFB4A0068E695 /* Spark.swift in Sources */,
 				5599F1821B13E7C300A138EB /* ScoreObject.swift in Sources */,
+				55FCB2601B4AFD7D0068E695 /* drawableProtocol.swift in Sources */,
 				5599F1801B13E78A00A138EB /* ScoreList.swift in Sources */,
 				5599F17E1B13E58300A138EB /* OS.swift in Sources */,
 			);
@@ -1087,6 +1095,7 @@
 				5599F1391B13DE1C00A138EB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5599F13D1B13DE1C00A138EB /* Build configuration list for PBXNativeTarget "SwiftBillTests" */ = {
 			isa = XCConfigurationList;
@@ -1095,6 +1104,7 @@
 				5599F13B1B13DE1C00A138EB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		559AF8E71B0EE4E60015AB87 /* Build configuration list for PBXProject "StepBill" */ = {
 			isa = XCConfigurationList;

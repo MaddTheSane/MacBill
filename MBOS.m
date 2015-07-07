@@ -16,7 +16,7 @@ static MBMCursor *cursor[NUM_OS];		/* array of OS cursors (drag/drop) */
 
 @implementation MBOS
 
-- (void)OS_load_pix
+- (void)loadPictures
 {
 	unsigned int i;
 	for (i = 0; i < NUM_OS; i++) {

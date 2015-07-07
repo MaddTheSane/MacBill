@@ -15,7 +15,7 @@ static int grabbed;
 
 @implementation MBBucket
 
-- (void)Bucket_load_pix
+- (void)loadPictures
 {
 	[ui loadImageNamed:@"bucket" hasTransparency:YES outPicture:&picture];
 	[ui loadCursorNamed:@"bucket" mask:CURSOR_OWN_MASK outCursor:&cursor];

@@ -13,7 +13,7 @@
     IBOutlet MBUI *ui;
 }
 
-- (void)OS_load_pix;
+- (void)loadPictures;
 - (void)OS_draw:(int)index atX:(int)x y:(int)y;
 @property (readonly) int width;
 @property (readonly) int height;

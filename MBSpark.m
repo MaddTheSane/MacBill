@@ -9,7 +9,7 @@ static MBPicture *pictures[2];
 
 @implementation MBSpark
 
-- (void)Spark_load_pix
+- (void)loadPictures
 {
 	int i;
 	for (i = 0; i < 2; i++)

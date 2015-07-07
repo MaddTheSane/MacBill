@@ -11,7 +11,7 @@
     IBOutlet MBUI *ui;
 }
 
-- (void)Bucket_load_pix;
+- (void)loadPictures;
 - (void)draw;
 - (BOOL)clickedAtX:(int)x y:(int)y;
 - (void)grabAtX:(int)x y:(int)y;

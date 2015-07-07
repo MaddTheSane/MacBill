@@ -47,36 +47,41 @@ determineOS(MBComputer *computer) {
 	ui = u;
 }
 
+- (instancetype)initWithSetup:(int)index
+{
+	if (self = [super init]) {
+		int j, counter = 0, flag;
+		int randx, randy;
+		int screensize = [game screenSize];
+		int border = BORDER(screensize);
+		do {
+			if (++counter > 4000)
+				return nil;
+			randx = RAND(border, screensize - border - width);
+			randy = RAND(border, screensize - border - height);
+			flag = 1;
+			/* check for conflicting computer placement */
+			for (j = 0; j < index && flag; j++) {
+				MBComputer *c = [network computerAtIndex:j];
+				int twidth = width - BILL_OFFSET_X + [MBBill width];
+				if ([ui UI_intersect:randx :randy :twidth :height
+									:c->x :c->y :twidth :height])
+					flag = 0;
+			}
+		} while (!flag);
+		x = randx;
+		y = randy;
+		type = RAND(1, NUM_SYS - 1);
+		os = determineOS(self);
+		busy = 0;
+		stray = NULL;
+	}
+	return self;
+}
+
 + (MBComputer *)newComputerWithSetup:(int)index
 {
-	MBComputer *computer = [[self alloc] init];
-
-	int j, counter = 0, flag;
-	int randx, randy;
-	int screensize = [game screenSize];
-	int border = BORDER(screensize);
-	do {
-		if (++counter > 4000)
-			return nil;
-		randx = RAND(border, screensize - border - width);
-		randy = RAND(border, screensize - border - height);
-		flag = 1;
-		/* check for conflicting computer placement */
-		for (j = 0; j < index && flag; j++) {
-			MBComputer *c = [network computerAtIndex:j];
-			int twidth = width - BILL_OFFSET_X + [MBBill width];
-			if ([ui UI_intersect:randx :randy :twidth :height
-					 :c->x :c->y :twidth :height])
-				flag = 0;
-		}
-	} while (!flag);
-	computer->x = randx;
-	computer->y = randy;
-	computer->type = RAND(1, NUM_SYS - 1);
-	computer->os = determineOS(computer);
-	computer->busy = 0;
-	computer->stray = NULL;
-	return computer;
+	return [[self alloc] initWithSetup:index];
 }
 
 - (BOOL)isComputerAtX:(int)locx y:(int)locy
@@ -101,7 +106,7 @@ determineOS(MBComputer *computer) {
 			atX:x + OS_OFFSET y:y + OS_OFFSET + 13];
 }
 
-+ (void)Computer_load_pix
++ (void)loadPictures
 {
 	unsigned int i;
 	for (i = 0; i < NUM_SYS; i++)

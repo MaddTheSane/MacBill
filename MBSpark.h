@@ -12,7 +12,7 @@
     IBOutlet MBUI *ui;
 }
 
-- (void)Spark_load_pix;
+- (void)loadPictures;
 @property (readonly) int width;
 @property (readonly) int height;
 - (void)drawAtX:(int)x y:(int)y index:(int)index;

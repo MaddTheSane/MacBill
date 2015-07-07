@@ -62,6 +62,12 @@ step_size(unsigned int level) {
 	return MIN(11 + level, 15);
 }
 
+
+@implementation MBBill
+@synthesize state;
+@synthesize x;
+@synthesize y;
+
 /*  Moves bill toward his target - returns whether or not he moved */
 static BOOL
 move(MBBill *bill, int mode) {
@@ -96,163 +102,160 @@ move(MBBill *bill, int mode) {
 	return YES;
 }
 
-static void
-draw_std(MBBill *bill) {
-	if (bill->cargo >= 0)
-		[os OS_draw:bill->cargo atX:bill->x + bill->x_offset
-			y:bill->y + bill->y_offset];
-	[ui drawPicture:bill->cels[bill->index] atX:bill->x y:bill->y];
+- (void)drawStandard
+{
+	if (cargo >= 0)
+		[os OS_draw:cargo atX:x + x_offset
+				  y:y + y_offset];
+	[ui drawPicture:cels[index] atX:x y:y];
 }
 
-static void
-draw_at(MBBill *bill) {
-	MBComputer *computer = [network computerAtIndex:bill->target_c];
-	if (bill->index > 6 && bill->index < 12)
-		[os OS_draw:0 atX:bill->x + bill->sx y:bill->y + bill->sy];
-	if (bill->cargo >= 0)
-		[os OS_draw:bill->cargo atX:bill->x + bill->x_offset
-			y:bill->y + bill->y_offset];
-	[ui drawPicture:bill->cels[bill->index] atX:computer->x y:computer->y];
+- (void)drawAt {
+	MBComputer *computer = [network computerAtIndex:target_c];
+	if (index > 6 && index < 12)
+		[os OS_draw:0 atX:x + sx y:y + sy];
+	if (cargo >= 0)
+		[os OS_draw:cargo atX:x + x_offset
+				  y:y + y_offset];
+	[ui drawPicture:cels[index] atX:computer->x y:computer->y];
 }
 
-static void
-draw_stray(MBBill *bill) {
-	[os OS_draw:bill->cargo atX:bill->x y:bill->y];
+-(void)drawStray {
+	[os OS_draw:cargo atX:x y:y];
 }
 
-/*  Update Bill's position */	
-static void
-update_in(MBBill *bill) {
-	int moved = move(bill, SLOW);
-	MBComputer *computer = [network computerAtIndex:bill->target_c];
+/*  Update Bill's position */
+- (void)updatePosition
+{
+	int moved = move(self, SLOW);
+	MBComputer *computer = [network computerAtIndex:target_c];
 	if (!moved && computer->os != OS_WINGDOWS && !computer->busy) {
 		computer->busy = 1;
-		bill->cels = acels;
-		bill->index = 0;
-		bill->state = BILL_STATE_AT;
+		cels = acels;
+		index = 0;
+		state = BILL_STATE_AT;
 		return;
 	}
 	else if (!moved) {
 		int i;
 		do {
 			i = RAND(0, [network countOfComputers] - 1);
-		} while (i == bill->target_c);
+		} while (i == target_c);
 		computer = [network computerAtIndex:i];
-		bill->target_c = i;
-		bill->target_x = computer->x + [computer width] - BILL_OFFSET_X;
-		bill->target_y = computer->y + BILL_OFFSET_Y;
+		target_c = i;
+		target_x = computer->x + [computer width] - BILL_OFFSET_X;
+		target_y = computer->y + BILL_OFFSET_Y;
 	}
-	bill->index++;
-	bill->index %= WCELS;
-	bill->y_offset += (8 * (bill->index % 2) - 4);
+	index++;
+	index %= WCELS;
+	y_offset += (8 * (index % 2) - 4);
 }
 
 /*  Update Bill standing at a computer */
-static void
-update_at(MBBill *bill) {
-	MBComputer *computer = [network computerAtIndex:bill->target_c];
-	if (bill->index == 0 && computer->os == OS_OFF) {
-		bill->index = 6;
+- (void)updateAtComputer
+{
+	MBComputer *computer = [network computerAtIndex:target_c];
+	if (index == 0 && computer->os == OS_OFF) {
+		index = 6;
 		if (computer->stray == NULL)
-			bill->cargo = -1;
+			cargo = -1;
 		else {
-			bill->cargo = computer->stray->cargo;
+			cargo = computer->stray->cargo;
 			[horde removeBill:computer->stray];
 			computer->stray = NULL;
 		}
 	} else
-		bill->index++;
-	if (bill->index == 13) {
-		bill->y_offset = -15;
-		bill->x_offset = -2;
-		get_border(&bill->target_x, &bill->target_y);
-		bill->index = 0;
-		bill->cels = lcels;
-		bill->state = BILL_STATE_OUT;
+		index++;
+	if (index == 13) {
+		y_offset = -15;
+		x_offset = -2;
+		get_border(&target_x, &target_y);
+		index = 0;
+		cels = lcels;
+		state = BILL_STATE_OUT;
 		computer->busy = 0;
 		return;
 	}
-	bill->y_offset = height - [os height];
-	switch (bill->index) {
-	case 1: 
-	case 2:
-		bill->x -= 8;
-		bill->x_offset +=8;
-		break;
-	case 3:
-		bill->x -= 10;
-		bill->x_offset +=10;
-		break;
-	case 4:
-		bill->x += 3;
-		bill->x_offset -=3;
-		break;
-	case 5:
-		bill->x += 2;
-		bill->x_offset -=2;
-		break;
-	case 6:
-		if (computer->os != OS_OFF) {
-			[network incrementCounter:NETWORK_COUNTER_BASE byValue: -1];
-			[network incrementCounter:NETWORK_COUNTER_OFF byValue: 1];
-			bill->cargo = computer->os;
-		}
-		else {
-			bill->x -= 21;
-			bill->x_offset += 21;
-		}
-		computer->os = OS_OFF;
-		bill->y_offset = -15;
-		bill->x += 20;
-		bill->x_offset -=20;
-		break;
-	case 7:
-		bill->sy = bill->y_offset;
-		bill->sx = -2;
-		break;
-	case 8:
-		bill->sy = -15;
-		bill->sx = -2;
-		break;
-	case 9:
-		bill->sy = -7;
-		bill->sx = -7;
-		bill->x -= 8;
-		bill->x_offset +=8;
-		break;	
-	case 10:
-		bill->sy = 0;
-		bill->sx = -7;
-		bill->x -= 15;
-		bill->x_offset +=15;
-		break;
-	case 11:
-		bill->sy = 0;
-		bill->sx = -7;
-		computer->os = OS_WINGDOWS;
-		[network incrementCounter:NETWORK_COUNTER_OFF byValue: -1];
-		[network incrementCounter:NETWORK_COUNTER_WIN byValue: 1];
-		break;
-	case 12:
-		bill->x += 11;
-		bill->x_offset -=11;
+	y_offset = height - [os height];
+	switch (index) {
+		case 1:
+		case 2:
+			x -= 8;
+			x_offset +=8;
+			break;
+		case 3:
+			x -= 10;
+			x_offset +=10;
+			break;
+		case 4:
+			x += 3;
+			x_offset -=3;
+			break;
+		case 5:
+			x += 2;
+			x_offset -=2;
+			break;
+		case 6:
+			if (computer->os != OS_OFF) {
+				[network incrementCounter:NETWORK_COUNTER_BASE byValue: -1];
+				[network incrementCounter:NETWORK_COUNTER_OFF byValue: 1];
+				cargo = computer->os;
+			} else {
+				x -= 21;
+				x_offset += 21;
+			}
+			computer->os = OS_OFF;
+			y_offset = -15;
+			x += 20;
+			x_offset -=20;
+			break;
+		case 7:
+			sy = y_offset;
+			sx = -2;
+			break;
+		case 8:
+			sy = -15;
+			sx = -2;
+			break;
+		case 9:
+			sy = -7;
+			sx = -7;
+			x -= 8;
+			x_offset +=8;
+			break;
+		case 10:
+			sy = 0;
+			sx = -7;
+			x -= 15;
+			x_offset +=15;
+			break;
+		case 11:
+			sy = 0;
+			sx = -7;
+			computer->os = OS_WINGDOWS;
+			[network incrementCounter:NETWORK_COUNTER_OFF byValue: -1];
+			[network incrementCounter:NETWORK_COUNTER_WIN byValue: 1];
+			break;
+		case 12:
+			x += 11;
+			x_offset -=11;
 	}
 }
 
 /* Updates Bill fleeing with his ill gotten gain */
-static void
-update_out(MBBill *bill) {
+- (void)updateOut
+{
 	int screensize = [game screenSize];
-	if ([ui UI_intersect:bill->x :bill->y :width :height :0 :0
-			 :screensize :screensize])
+	if ([ui UI_intersect:x :y :width :height :0 :0
+						:screensize :screensize])
 	{
-		move(bill, FAST);
-		bill->index++;
-		bill->index %= WCELS;
-		bill->y_offset += (8*(bill->index%2)-4); 
+		move(self, FAST);
+		index++;
+		index %= WCELS;
+		y_offset += (8*(index%2)-4);
 	}
 	else {
-		[horde removeBill:bill];
+		[horde removeBill:self];
 		[horde incrementCounter:HORDE_COUNTER_ON byValue:-1];
 		[horde incrementCounter:HORDE_COUNTER_OFF byValue:1];
 	}
@@ -260,28 +263,23 @@ update_out(MBBill *bill) {
 
 
 /* Updates a Bill who is dying */
-static void
-update_dying(MBBill *bill) {
-	if (bill->index < DCELS - 1){
-		bill->y_offset += (bill->index * GRAVITY);
-		bill->index++;	
+- (void)updateDying {
+	if (index < DCELS - 1){
+		y_offset += (index * GRAVITY);
+		index++;
 	}
 	else {
-		bill->y += bill->y_offset;
-		if (bill->cargo < 0 || bill->cargo == OS_WINGDOWS)
-			[horde removeBill:bill];
+		y += y_offset;
+		if (cargo < 0 || cargo == OS_WINGDOWS)
+			[horde removeBill:self];
 		else {
-			[horde moveBill:bill];
-			bill->state = BILL_STATE_STRAY;
+			[horde moveBill:self];
+			state = BILL_STATE_STRAY;
 		}
 		[horde incrementCounter:HORDE_COUNTER_ON byValue:-1];
 	}
 }
 
-@implementation MBBill
-@synthesize state;
-@synthesize x;
-@synthesize y;
 
 + (void)Bill_class_init:g :h :n :o :u
 {
@@ -324,13 +322,13 @@ update_dying(MBBill *bill) {
 		case BILL_STATE_IN:
 		case BILL_STATE_OUT:
 		case BILL_STATE_DYING:
-			draw_std(self);
+			[self drawStandard];
 			break;
 		case BILL_STATE_AT:
-			draw_at(self);
+			[self drawAt];
 			break;
 		case BILL_STATE_STRAY:
-			draw_stray(self);
+			[self drawStray];
 			break;
 		default:
 			break;
@@ -341,16 +339,16 @@ update_dying(MBBill *bill) {
 {
 	switch (state) {
 		case BILL_STATE_IN:
-			update_in(self);
+			[self updatePosition];
 			break;
 		case BILL_STATE_AT:
-			update_at(self);
+			[self updateAtComputer];
 			break;
 		case BILL_STATE_OUT:
-			update_out(self);
+			[self updateOut];
 			break;
 		case BILL_STATE_DYING:
-			update_dying(self);
+			[self updateDying];
 			break;
 		default:
 			break;
@@ -379,7 +377,7 @@ update_dying(MBBill *bill) {
 		locy > y && locy < y + [os height]);
 }
 
-+ (void)Bill_load_pix
++ (void)loadPictures
 {
 	int i;
 	for (i = 0; i < WCELS - 1; i++) {

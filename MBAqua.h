@@ -39,9 +39,9 @@ struct MBPicture {
     IBOutlet NSTextView *story_tv;
 }
 
-- (void)aqua_set_cursor:(MBMCursor *)cursor;
-- (void)aqua_load_cursor:(NSString*)name :(MBCursorMap)masked :(MBMCursor **)cursorp;
-- (void)aqua_load_picture:(NSString*)name :(int)trans :(MBPicture **)pictp;
+- (void)setCursorTo:(MBMCursor *)cursor;
+- (void)loadCursorNamed:(NSString*)name mask:(MBCursorMap)masked outCursor:(MBMCursor **)cursorp;
+- (void)loadPictureNamed:(NSString*)name hasTransparency:(BOOL)trans outPicture:(inout MBPicture **)pictp;
 - (int)aqua_picture_width:(in MBPicture *)pict;
 - (int)aqua_picture_height:(in MBPicture *)pict;
 - (void)clearWindow;

@@ -18,7 +18,7 @@
 - (void)draw;
 - (BOOL)isComputerAtX:(int)locx y:(int)locy;
 - (BOOL)isCompatibleWithSystem:(int)system;
-+ (void)Computer_load_pix;
++ (void)loadPictures;
 @property (readonly) int width;
 @property (readonly) int height;
 

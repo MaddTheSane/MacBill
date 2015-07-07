@@ -67,10 +67,10 @@ static int screensize;
  * Cursor handling
  */
 
-- (void)aqua_set_cursor:(MBMCursor *)cursor
+- (void)setCursorTo:(MBMCursor *)cursor
 {
 	[cursor->cursor set];
-	if ([[[cursor->cursor image] name] compare:@"hand"
+	if ([cursor->cursor.image.name compare:@"hand"
 			options:NSCaseInsensitiveSearch
 			range:NSMakeRange(0, 4)] == NSOrderedSame) {
 		[NSCursor unhide];
@@ -81,11 +81,11 @@ static int screensize;
 	};
 }
 
-- (void)aqua_load_cursor:(NSString*)name :(MBCursorMap)masked :(MBMCursor **)cursorp
+- (void)loadCursorNamed:(NSString*)name mask:(MBCursorMap)masked outCursor:(MBMCursor **)cursorp
 {
 	MBMCursor *cursor = malloc(sizeof(MBMCursor));
 	MBPicture *pict;
-	[self aqua_load_picture:name :0 :&pict];
+	[self loadPictureNamed:name hasTransparency:NO outPicture:&pict];
 	cursor->cursor = [[NSCursor alloc] initWithImage:pict->img
 						hotSpot:NSMakePoint([self aqua_picture_width:pict] / 2,
 											[self aqua_picture_height:pict] / 2)];
@@ -96,7 +96,7 @@ static int screensize;
  * Pixmap handling
  */
 
-- (void)aqua_load_picture:(NSString*)name :(int)trans :(MBPicture **)pictp
+- (void)loadPictureNamed:(NSString*)name hasTransparency:(BOOL)trans outPicture:(inout MBPicture **)pictp
 {
 	MBPicture *pict = malloc(sizeof(MBPicture));
 	pict->img = [NSImage imageNamed:name];
@@ -105,12 +105,12 @@ static int screensize;
 
 - (int)aqua_picture_width:(in MBPicture *)pict
 {
-	return [pict->img size].width;
+	return pict->img.size.width;
 }
 
 - (int)aqua_picture_height:(in MBPicture *)pict
 {
-	return [pict->img size].height;
+	return pict->img.size.height;
 }
 
 - (void)clearWindow

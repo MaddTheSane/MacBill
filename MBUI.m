@@ -51,7 +51,7 @@ static int interval = 200;
 
 - (void)setCursor:(MBMCursor *)cursor
 {
-	[aqua aqua_set_cursor:cursor];
+	[aqua setCursorTo:cursor];
 }
 
 - (void)clear
@@ -92,7 +92,7 @@ static int interval = 200;
 
 - (void)loadImageNamed:(NSString*)name hasTransparency:(BOOL)trans outPicture:(inout MBPicture **)pictp
 {
-	[aqua aqua_load_picture:name :trans :pictp];
+	[aqua loadPictureNamed:name hasTransparency:trans outPicture:pictp];
 }
 
 - (int)UI_picture_width:(in MBPicture *)pict
@@ -107,7 +107,7 @@ static int interval = 200;
 
 - (void)loadCursorNamed:(NSString*)name mask:(MBCursorMap)masked outCursor:(inout MBMCursor **)cursorp
 {
-	[aqua aqua_load_cursor:name :masked :cursorp];
+	[aqua loadCursorNamed:name mask:masked outCursor:cursorp];
 }
 
 - (BOOL)UI_intersect:(int)x1 :(int)y1 :(int)w1 :(int)h1 :(int)x2 :(int)y2 :(int)w2 :(int)h2

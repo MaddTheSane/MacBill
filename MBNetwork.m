@@ -43,9 +43,10 @@ static int counters[NETWORK_COUNTER_MAX + 1]; 	/* number in each state */
 	}
 	computers = [[NSMutableArray alloc] init];
 	for (i = 0; i < ncomputers; i++) {
-		MBComputer *comp = [[MBComputer newComputerWithSetup:i] autorelease];
+		MBComputer *comp = [MBComputer newComputerWithSetup:i];
 		if (comp != nil) {
 			[computers addObject:comp];
+			[comp release];
 		} else {
 			ncomputers = i - 1;
 			break;

@@ -46,7 +46,7 @@ typedef NS_ENUM(int, BillState) {
 - (void)killBill;
 - (BOOL)clickedAtX:(int)locx y:(int)locy;
 - (BOOL)clickedStrayAtX:(int)locx y:(int)locy;
-+ (void)Bill_load_pix;
++ (void)loadPictures;
 + (int)width;
 
 @end

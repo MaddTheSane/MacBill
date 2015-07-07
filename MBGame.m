@@ -272,11 +272,11 @@ static int screensize = SCREENSIZE;
 	[ui loadCursorNamed:@"hand_down" mask:CURSOR_SEP_MASK outCursor:&downcursor];
 	[ui setCursor:defaultcursor];
 
-	[MBBill Bill_load_pix];
-	[os OS_load_pix];
-	[MBComputer Computer_load_pix];
-	[bucket Bucket_load_pix];
-	[spark Spark_load_pix];
+	[MBBill loadPictures];
+	[os loadPictures];
+	[MBComputer loadPictures];
+	[bucket loadPictures];
+	[spark loadPictures];
 
 	state = STATE_WAITING;
 	[ui setPauseButton:NO];
